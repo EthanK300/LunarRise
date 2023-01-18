@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Xclipse_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Xclipse.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/editor/GameViewWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/editor/MenuBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/editor/PropertiesWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/editor/SceneHierarchyWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/editor/eImGui.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/AnimationState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Component.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/EditorCamera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/FontRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Frame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/GameCamera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Gizmo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/GizmoSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/GridLines.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/KeyControls.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/MouseControls.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/NonPickable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/PlayerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/RigidBody.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/ScaleGizmo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Sprite.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/SpriteRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Spritesheet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/StateMachine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Terrain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/TranslateGizmo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/ComponentDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/GameObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/GameObjectDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/ImGuiLayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/PreFabs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/Sound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/Transform.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/Window.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/keyListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/mouseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/util/AssetPool.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/util/JMath.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/util/Time.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/util/settings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/observers/EventSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/observers/Observer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/observers/events/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/observers/events/EventType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics2d/EngineContactListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics2d/Physics2D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics2d/RaycastInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics2d/components/Box2DCollider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics2d/components/CircleCollider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics2d/components/PillboxCollider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics2d/components/RigidBody2D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics2d/enums/BodyType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/DebugDraw.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/Framebuffer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/Line2D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/PickingTexture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/RenderBatch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/Renderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/Shader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/Texture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/LevelSceneInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/Scene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/SceneInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2KTcvx68Xl9TeO3CHNLOMd3djn3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/awalk_/IntelliJ/Xclipse/src/observers",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\awalk_\IntelliJ\Xclipse\src\observers" />
+      <recent name="C:\Users\awalk_\IntelliJ\Xclipse\src\editor" />
+      <recent name="C:\Users\awalk_\IntelliJ\Xclipse\src\main\components" />
+      <recent name="C:\Users\awalk_\IntelliJ\Xclipse\src\main\engine" />
+      <recent name="C:\Users\awalk_\IntelliJ\Xclipse\src\main\util" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="" />
+      <created>1674002248083</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1674002248083</updated>
+      <workItem from="1674002249159" duration="1704000" />
+      <workItem from="1674004014098" duration="42000" />
+      <workItem from="1674004101512" duration="592000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
