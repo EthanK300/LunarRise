@@ -4,81 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Xclipse_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Xclipse.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/editor/GameViewWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/editor/MenuBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/editor/PropertiesWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/editor/SceneHierarchyWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/editor/eImGui.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/AnimationState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/Component.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/EditorCamera.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/FontRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/Frame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/GameCamera.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/Gizmo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/GizmoSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/GridLines.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/KeyControls.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/MouseControls.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/NonPickable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/PlayerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/RigidBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/ScaleGizmo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/Sprite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/SpriteRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/Spritesheet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/StateMachine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/Terrain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/TranslateGizmo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/Camera.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/ComponentDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/GameObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/GameObjectDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/ImGuiLayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/PreFabs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/Sound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/Transform.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/Window.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/keyListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/engine/mouseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/util/AssetPool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/util/JMath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/util/Time.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/util/settings.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/observers/EventSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/observers/Observer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/observers/events/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/observers/events/EventType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics2d/EngineContactListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics2d/Physics2D.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics2d/RaycastInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics2d/components/Box2DCollider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics2d/components/CircleCollider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics2d/components/PillboxCollider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics2d/components/RigidBody2D.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics2d/enums/BodyType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/DebugDraw.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/Framebuffer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/Line2D.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/PickingTexture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/RenderBatch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/Renderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/Shader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/Texture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scenes/LevelSceneInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scenes/Scene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scenes/SceneInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="Initial commit, migrated over from Eclipse">
+      <change afterPath="$PROJECT_DIR$/src/main/components/Interaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/PlayerController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +25,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -117,7 +51,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
@@ -143,10 +77,41 @@
       <workItem from="1674002249159" duration="1704000" />
       <workItem from="1674004014098" duration="42000" />
       <workItem from="1674004101512" duration="592000" />
+      <workItem from="1674021720497" duration="7071000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
+      <created>1674022057891</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1674022057891</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initial commit, migrated over from Eclipse">
+      <created>1674022104040</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1674022104040</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit, migrated over from Eclipse" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit, migrated over from Eclipse" />
   </component>
 </project>

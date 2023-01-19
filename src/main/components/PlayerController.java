@@ -208,6 +208,7 @@ public class PlayerController extends Component{
 		if(isDead) {
 			return;
 		}
+		//if colliding with ground
 		if(collidingObject.getComponent(Terrain.class)!= null) {
 			if(Math.abs(contactNormal.x)> 0.8f ) {
 				this.velocity.x = 0;
