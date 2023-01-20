@@ -60,7 +60,7 @@ public class Interaction extends Component{
             case 2:
                 break;
             default:
-                assert false: "Error: interaction does not exist";
+                assert false: "Error: interaction not defined";
         }
     }
 

@@ -2,7 +2,7 @@
   <artifact type="jar" name="Xclipse:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Xclipse_jar</output-path>
     <root id="archive" name="Xclipse.jar">
-      <element id="module-output" name="Xclipse" />
+      <element id="module-output" name="LunarRise" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/LIBS/LIBS/lwjgl.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/LIBS/LIBS/gson-2.10.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/LIBS/LIBS/lwjgl-egl.jar" path-in-jar="/" />

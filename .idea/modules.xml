@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Xclipse.iml" filepath="$PROJECT_DIR$/Xclipse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LunarRise.iml" filepath="$PROJECT_DIR$/LunarRise.iml" />
     </modules>
   </component>
 </project>
