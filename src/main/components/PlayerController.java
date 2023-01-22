@@ -118,7 +118,7 @@ public class PlayerController extends Component{
 		//checkOnLeft();
 		if((keyListener.isKeyPressed(GLFW_KEY_SPACE) || keyListener.isKeyPressed(GLFW_KEY_UP)) && (jumpTime > 0 || onGround || groundDebounce > 0)){
 			//jumped
-			System.out.println(System.currentTimeMillis() + "," + jumpTime);
+			//System.out.println(System.currentTimeMillis() + "," + jumpTime);
 			if((onGround || groundDebounce > 0) && jumpTime == 0){
 				//AssetPool.getSound("assets/sounds/jump-small.ogg").play();//TODO: add asset to game
 				jumpTime = 28;//max variable length jump
@@ -150,7 +150,7 @@ public class PlayerController extends Component{
 		this.velocity.y += this.acceleration.y * dt;
 		this.velocity.x = Math.max(Math.min(this.velocity.x,  this.terminalVelocity.x), -this.terminalVelocity.x);
 		this.velocity.y = Math.max(Math.min(this.velocity.y,  this.terminalVelocity.y), -this.terminalVelocity.y);
-		
+		//System.out.println(this.velocity);
 		//update box2d physics about new movement
 		this.rb.setVelocity(this.velocity);
 		this.rb.setAngularVelocity(0);

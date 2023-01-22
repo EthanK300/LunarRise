@@ -41,17 +41,14 @@ public abstract class Component {
 	}
 	
 	public void preSolve(GameObject collidingObject, Contact contact, Vector2f hitNormal) {
-		//useful for like jumping up throug ha block but not falling back through it
+		//useful for like jumping up through a block but not falling back through it
 		
 	}
 
 	public void postSolve(GameObject collidingObject, Contact contact, Vector2f hitNormal) {
 		
 	}
-	
-	
 
-	@SuppressWarnings("rawtypes")
 	public void imgui() {
 		try {
 			Field[] fields = this.getClass().getDeclaredFields();

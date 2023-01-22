@@ -142,6 +142,10 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 						 * 	object.addComponent(new BreakableBlock());
 						 * }
 						 */
+						if(i == 15){
+							//System.out.println("15");
+							object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_F, 1));
+						}
 						
 						levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
 						
