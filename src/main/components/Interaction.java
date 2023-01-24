@@ -17,17 +17,19 @@ public class Interaction extends Component{
     private static Vector2f pos;
     private Vector2f range;
     private Vector2f dimensions;
+    private Vector3f color = new Vector3f(0.3f, 0.5f, 0.0f);
     private int keyCode;
     private int interactionID;
     private float debounce;
     private static ArrayList<Interaction> interactions = new ArrayList<>();
 
     public Interaction(Vector2f range,Vector2f dimensions, int keyCode, int interactionID){
-        interactions.add(this);
+
         this.range = range;
         this.keyCode = keyCode;
         this.interactionID = interactionID;
         this.dimensions = dimensions;
+        interactions.add(this);
     }
 
     @Override
@@ -48,9 +50,9 @@ public class Interaction extends Component{
         for(Interaction inter : interactions){
             //System.out.println(interactions);
             //check if player in range
-            if((diffX < inter.range.x) || (diffY < inter.range.y)){
+            if((diffX < inter.range.x) && (diffY < inter.range.y)){
                 //System.out.println(diffX + "," + diffY);
-                DebugDraw.addBox2D(pos, dimensions, 0.0f, new Vector3f(0.5f, 0.5f, 0.0f));
+                DebugDraw.addBox2D(pos, new Vector2f(dimensions.x / 4, dimensions.y / 4), 0.0f, color);
                 //display lines if in range, execute interaction if key pressed
                 if(keyListener.isKeyPressed(inter.keyCode) && debounce <= 0){
                     //System.out.println("inside inter");

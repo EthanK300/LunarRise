@@ -109,6 +109,7 @@ public class Window implements Observer{
 		//terminate GLFW
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();
+		System.err.println("Closed.");
 	}
 	public void init() {
 		//setup error sequence
