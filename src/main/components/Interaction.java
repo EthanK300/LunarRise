@@ -17,19 +17,19 @@ public class Interaction extends Component{
     private static Vector2f pos;
     private Vector2f range;
     private Vector2f dimensions;
-    private Vector3f color = new Vector3f(0.3f, 0.5f, 0.0f);
+    private Vector3f color;
     private int keyCode;
     private int interactionID;
     private float debounce;
-    private static ArrayList<Interaction> interactions = new ArrayList<>();
 
-    public Interaction(Vector2f range,Vector2f dimensions, int keyCode, int interactionID){
+    public Interaction(Vector2f range,Vector2f dimensions, int keyCode, int interactionID, Vector3f color){
 
         this.range = range;
         this.keyCode = keyCode;
         this.interactionID = interactionID;
         this.dimensions = dimensions;
-        interactions.add(this);
+        this.color = color;
+
     }
 
     @Override
@@ -47,21 +47,21 @@ public class Interaction extends Component{
         float diffY = Math.abs(pos.y - player.transform.position.y);
         //System.out.println(diffX + "," + diffY);
 
-        for(Interaction inter : interactions){
-            //System.out.println(interactions);
-            //check if player in range
-            if((diffX < inter.range.x) && (diffY < inter.range.y)){
-                //System.out.println(diffX + "," + diffY);
-                DebugDraw.addBox2D(pos, new Vector2f(dimensions.x / 4, dimensions.y / 4), 0.0f, color);
-                //display lines if in range, execute interaction if key pressed
-                if(keyListener.isKeyPressed(inter.keyCode) && debounce <= 0){
-                    //System.out.println("inside inter");
-                    //trigger appropriate interaction
-                    triggerInteraction(inter.interactionID);
-                    debounce = 1.0f;
-                }
+
+        //System.out.println(interactions);
+        //check if player in range
+        if((diffX < this.range.x) && (diffY < this.range.y)){
+            //System.out.println(diffX + "," + diffY);
+            DebugDraw.addBox2D(pos, new Vector2f(dimensions.x / 4, dimensions.y / 4), 0.0f, color);
+            //display lines if in range, execute interaction if key pressed
+            if(keyListener.isKeyPressed(this.keyCode) && debounce <= 0){
+                //System.out.println("inside inter");
+                //trigger appropriate interaction
+                triggerInteraction(this.interactionID);
+                debounce = 1.0f;
             }
         }
+
     }
 
     private void triggerInteraction(int interactionID){

@@ -10,6 +10,7 @@ import imgui.ImVec2;
 import main.components.*;
 import main.engine.*;
 import main.util.AssetPool;
+import org.joml.Vector3f;
 import physics2d.components.Box2DCollider;
 import physics2d.components.RigidBody2D;
 import physics2d.enums.BodyType;
@@ -144,7 +145,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 						 */
 						if(i == 15){
 							//System.out.println("15");
-							object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_F, 1));
+							object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_F, 1, new Vector3f(0.0f, 0.0f, 1.0f)));
 						}
 						
 						levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
