@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="added debounce to interactables and drawing capabilities">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/components/Interaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/Interaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/Window.java" afterDir="false" />
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="force commit">
+      <change beforePath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +21,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {

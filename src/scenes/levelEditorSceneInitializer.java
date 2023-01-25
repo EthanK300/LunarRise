@@ -121,35 +121,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 					
 					ImGui.pushID(i);
 					if(ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
-						GameObject object = PreFabs.generateSpriteObject(sprite, 0.25f, 0.25f);//generated sprite size
-						RigidBody2D rb = new RigidBody2D();
-						//if the shift key is pressed it changes to a non-static object
-						if(keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) || mouseListener.mouseButtonDown(GLFW_KEY_RIGHT_SHIFT)) {
-							rb.setBodyType(BodyType.Dynamic);
-							//System.out.println("pressed");
-						}else{
-							rb.setBodyType(BodyType.Static);
-						}
-						//rb.setBodyType(BodyType.Static);
-						object.addComponent(rb);
-						Box2DCollider b2d = new Box2DCollider();
-						b2d.setHalfSize(new Vector2f(0.25f, 0.25f)); //TODO: change the 0.25f to the grid size
-						object.addComponent(b2d);
-						object.addComponent(new Terrain());
-						//add sprites from the appropriate spritesheet that you want to be breakable objects
-						/**
-						 * format: 
-						 * if(i = indexOfTexture){
-						 * 	object.addComponent(new BreakableBlock());
-						 * }
-						 */
-						if(i == 15){
-							//System.out.println("15");
-							object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_F, 1, new Vector3f(0.0f, 0.0f, 1.0f)));
-						}
-						
-						levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
-						
+						addBlock2D(sprite, i);
 					}
 					ImGui.popID();
 					
@@ -209,6 +181,38 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		
 		
 		ImGui.end();
+	}
+
+	public void addBlock2D(Sprite sprite, int i){
+		GameObject object = PreFabs.generateSpriteObject(sprite, 0.25f, 0.25f);//generated sprite size
+		RigidBody2D rb = new RigidBody2D();
+		//if the shift key is pressed it changes to a non-static object
+		if(keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) || mouseListener.mouseButtonDown(GLFW_KEY_RIGHT_SHIFT)) {
+			rb.setBodyType(BodyType.Dynamic);
+			//System.out.println("pressed");
+		}else{
+			rb.setBodyType(BodyType.Static);
+		}
+		//rb.setBodyType(BodyType.Static);
+		object.addComponent(rb);
+		Box2DCollider b2d = new Box2DCollider();
+		b2d.setHalfSize(new Vector2f(0.25f, 0.25f)); //TODO: change the 0.25f to the grid size
+		object.addComponent(b2d);
+		object.addComponent(new Terrain());
+		//add sprites from the appropriate spritesheet that you want to be breakable objects
+		/**
+		 * format:
+		 * if(i = indexOfTexture){
+		 * 	object.addComponent(new BreakableBlock());
+		 * }
+		 */
+		if(i == 15){
+			//System.out.println("15");
+			object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_F, 1, new Vector3f(0.0f, 0.0f, 1.0f)));
+		}
+
+		levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
+
 	}
 	
 }
