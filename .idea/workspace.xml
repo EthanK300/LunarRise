@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="force commit">
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="refined">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/Interaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/Interaction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,6 +115,7 @@
       <workItem from="1674173051846" duration="44000" />
       <workItem from="1674173186752" duration="9658000" />
       <workItem from="1674372172657" duration="17420000" />
+      <workItem from="1674708194365" duration="1105000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>
@@ -155,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674419138843</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="abstracted block creator">
+      <created>1674627856530</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1674627856530</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +200,8 @@
     <MESSAGE value="renamed" />
     <MESSAGE value="added test interaction" />
     <MESSAGE value="added debounce to interactables and drawing capabilities" />
-    <option name="LAST_COMMIT_MESSAGE" value="added debounce to interactables and drawing capabilities" />
+    <MESSAGE value="abstracted block creator" />
+    <MESSAGE value="refined" />
+    <option name="LAST_COMMIT_MESSAGE" value="refined" />
   </component>
 </project>

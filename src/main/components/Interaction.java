@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Interaction extends Component{
-
-    private static transient GameObject player;
+    private static GameObject player;
     private static Vector2f pos;
     private Vector2f range;
     private Vector2f dimensions;
@@ -35,7 +34,6 @@ public class Interaction extends Component{
     @Override
     public void start(){
         this.player = Window.getScene().getGameObjectWith(PlayerController.class);
-
     }
 
     @Override
@@ -63,10 +61,12 @@ public class Interaction extends Component{
         }
 
     }
-
+    //TODO: make this better and future proof it
     private void triggerInteraction(int interactionID){
         switch(interactionID){
             case 0:
+                this.gameObject.destroy();
+                System.out.println("destroyed");
                 break;
             case 1:
                 System.out.println("pressed f");

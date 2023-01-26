@@ -183,7 +183,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		ImGui.end();
 	}
 
-	public void addBlock2D(Sprite sprite, int i){
+	public void addBlock2D(Sprite sprite, int Index){
 		GameObject object = PreFabs.generateSpriteObject(sprite, 0.25f, 0.25f);//generated sprite size
 		RigidBody2D rb = new RigidBody2D();
 		//if the shift key is pressed it changes to a non-static object
@@ -206,9 +206,14 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		 * 	object.addComponent(new BreakableBlock());
 		 * }
 		 */
-		if(i == 15){
+		//TODO: add more objects with interactions
+		if(Index == 15){
 			//System.out.println("15");
 			object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_F, 1, new Vector3f(0.0f, 0.0f, 1.0f)));
+		}
+		if(Index == 14){
+			//System.out.println("15");
+			object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_C, 0, new Vector3f(0.0f, 0.0f, 1.0f)));
 		}
 
 		levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
