@@ -16,8 +16,10 @@ import physics2d.components.RigidBody2D;
 import physics2d.enums.BodyType;
 import static org.lwjgl.glfw.GLFW.*;
 
+
+
 public class levelEditorSceneInitializer extends SceneInitializer{
-	
+	public InteractionManager manager;
 	private Spritesheet sprites;
 	//SpriteRenderer obj1Sprite;
 	private GameObject levelEditorStuff;
@@ -44,7 +46,9 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 
 		scene.addGameObjectToScene(levelEditorStuff);
 		//TODO: TIMESTAMP: 8:34:41, create a new spritesheet for map textures
-		
+		if(manager == null){
+			manager = new InteractionManager();
+		}
 		
 	}
 	@Override
@@ -209,11 +213,15 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		//TODO: add more objects with interactions
 		if(Index == 15){
 			//System.out.println("15");
-			object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_F, 1, new Vector3f(0.0f, 0.0f, 1.0f)));
+			Interaction inty = new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_F, 1, new Vector3f(0.0f, 0.0f, 1.0f));
+			object.addComponent(inty);
+			manager.add(inty);
 		}
 		if(Index == 14){
 			//System.out.println("15");
-			object.addComponent(new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_C, 0, new Vector3f(0.0f, 0.0f, 1.0f)));
+			Interaction inty = new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_C, 0, new Vector3f(0.0f, 0.0f, 1.0f));
+			object.addComponent(inty);
+			manager.add(inty);
 		}
 
 		levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
