@@ -60,12 +60,13 @@ public class destroyer extends Interaction {
         switch (interactionID) {
             case 0:
                 this.gameObject.destroy();
-                System.out.println("activated 2");
+                System.out.println("activated 0");
                 break;
             case 1:
                 System.out.println("activated 1");
                 break;
             case 2:
+                System.out.println("activated 2");
                 break;
             default:
                 assert false : "Error: interaction not defined";

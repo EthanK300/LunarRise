@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="started interaction refactor">
-      <change afterPath="$PROJECT_DIR$/src/main/components/destroyer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/destroyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/destroyer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +101,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -245,15 +243,5 @@
     <MESSAGE value="added interaction manager and it's list" />
     <MESSAGE value="started interaction refactor" />
     <option name="LAST_COMMIT_MESSAGE" value="started interaction refactor" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="com.google.gson.JsonIOException" package="com.google.gson" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
