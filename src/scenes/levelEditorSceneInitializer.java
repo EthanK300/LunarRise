@@ -217,6 +217,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 			//manager.add(inty);
 		}
 		if(Index == 14){
+			object.addComponent(new destroyer(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_C, 0, new Vector3f(0.0f, 0.0f, 1.0f)));
 			//System.out.println("15");
 			//Interaction inty = new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_C, 0, new Vector3f(0.0f, 0.0f, 1.0f));
 			//object.addComponent(inty);
