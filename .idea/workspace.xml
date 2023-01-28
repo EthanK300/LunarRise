@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="added interaction manager and it's list">
-      <change afterPath="$PROJECT_DIR$/src/main/components/InteractionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/components/detector.java" afterDir="false" />
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="started interaction refactor">
+      <change afterPath="$PROJECT_DIR$/src/main/components/destroyer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/components/Interaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/Interaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/components/InteractionManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scenes/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -125,7 +127,7 @@
       <workItem from="1674708194365" duration="1269000" />
       <workItem from="1674773602068" duration="2382000" />
       <workItem from="1674794961817" duration="26000" />
-      <workItem from="1674860684648" duration="4214000" />
+      <workItem from="1674860684648" duration="5907000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>
@@ -197,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674793821902</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="started interaction refactor">
+      <created>1674865096317</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1674865096317</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,7 +243,8 @@
     <MESSAGE value="abstracted block creator" />
     <MESSAGE value="refined" />
     <MESSAGE value="added interaction manager and it's list" />
-    <option name="LAST_COMMIT_MESSAGE" value="added interaction manager and it's list" />
+    <MESSAGE value="started interaction refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="started interaction refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
