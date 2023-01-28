@@ -65133,7 +65133,7 @@
         "properties": {
           "position": {
             "x": 4.125,
-            "y": 0.875
+            "y": 1.875
           },
           "scale": {
             "x": 0.25,
@@ -65263,136 +65263,6 @@
         "properties": {
           "position": {
             "x": 4.125,
-            "y": 1.875
-          },
-          "scale": {
-            "x": 0.25,
-            "y": 0.25
-          },
-          "rotation": 0.0,
-          "zIndex": 0,
-          "uid": 1657
-        }
-      },
-      {
-        "type": "main.components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filepath": "assets/images/decorationsAndBlocks.png",
-              "texID": 6,
-              "width": 112,
-              "height": 192
-            },
-            "texCoords": [
-              {
-                "x": 0.2857143,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.2857143,
-                "y": 0.75
-              },
-              {
-                "x": 0.14285715,
-                "y": 0.75
-              },
-              {
-                "x": 0.14285715,
-                "y": 0.8333333
-              }
-            ]
-          },
-          "uid": 1658
-        }
-      },
-      {
-        "type": "physics2d.components.RigidBody2D",
-        "properties": {
-          "velocity": {
-            "x": 0.0,
-            "y": 0.0
-          },
-          "angularDamping": 0.8,
-          "linearDamping": 0.9,
-          "mass": 0.0,
-          "bodyType": "Static",
-          "fixedRotation": false,
-          "continuousCollision": true,
-          "friction": 0.1,
-          "angularVelocity": 0.0,
-          "gravityScale": 1.0,
-          "isSensor": false,
-          "uid": 1659
-        }
-      },
-      {
-        "type": "physics2d.components.Box2DCollider",
-        "properties": {
-          "halfSize": {
-            "x": 0.25,
-            "y": 0.25
-          },
-          "origin": {
-            "x": 0.0,
-            "y": 0.0
-          },
-          "offset": {
-            "x": 0.0,
-            "y": 0.0
-          },
-          "uid": 1660
-        }
-      },
-      {
-        "type": "main.components.Terrain",
-        "properties": {
-          "uid": 1661
-        }
-      },
-      {
-        "type": "main.components.Interaction",
-        "properties": {
-          "range": {
-            "x": 1.0,
-            "y": 1.0
-          },
-          "dimensions": {
-            "x": 1.0,
-            "y": 1.0
-          },
-          "color": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 1.0
-          },
-          "keyCode": 70,
-          "interactionID": 1,
-          "debounce": 0.0,
-          "uid": 1662
-        }
-      }
-    ],
-    "isDead": false
-  },
-  {
-    "uid": 605,
-    "doSerialization": true,
-    "name": "Sprite_Object_Gen",
-    "components": [
-      {
-        "type": "main.engine.Transform",
-        "properties": {
-          "position": {
-            "x": 4.125,
             "y": 1.625
           },
           "scale": {
@@ -65492,7 +65362,7 @@
     "isDead": false
   },
   {
-    "uid": 606,
+    "uid": 605,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -65600,7 +65470,7 @@
     "isDead": false
   },
   {
-    "uid": 607,
+    "uid": 606,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -65852,7 +65722,7 @@
     "isDead": false
   },
   {
-    "uid": 608,
+    "uid": 607,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -65960,7 +65830,7 @@
     "isDead": false
   },
   {
-    "uid": 609,
+    "uid": 608,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -66090,7 +65960,7 @@
     "isDead": false
   },
   {
-    "uid": 610,
+    "uid": 609,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -66220,7 +66090,7 @@
     "isDead": false
   },
   {
-    "uid": 611,
+    "uid": 610,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -66350,7 +66220,7 @@
     "isDead": false
   },
   {
-    "uid": 612,
+    "uid": 611,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -66480,7 +66350,7 @@
     "isDead": false
   },
   {
-    "uid": 613,
+    "uid": 612,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -66610,7 +66480,7 @@
     "isDead": false
   },
   {
-    "uid": 614,
+    "uid": 613,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -66718,7 +66588,7 @@
     "isDead": false
   },
   {
-    "uid": 615,
+    "uid": 614,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -66848,7 +66718,7 @@
     "isDead": false
   },
   {
-    "uid": 616,
+    "uid": 615,
     "doSerialization": true,
     "name": "Sprite_Object_Gen",
     "components": [
@@ -66856,7 +66726,7 @@
         "type": "main.engine.Transform",
         "properties": {
           "position": {
-            "x": 3.625,
+            "x": 3.375,
             "y": 0.875
           },
           "scale": {
@@ -66865,7 +66735,7 @@
           },
           "rotation": 0.0,
           "zIndex": 0,
-          "uid": 1864
+          "uid": 1916
         }
       },
       {
@@ -66905,7 +66775,7 @@
               }
             ]
           },
-          "uid": 1865
+          "uid": 1917
         }
       },
       {
@@ -66925,7 +66795,7 @@
           "angularVelocity": 0.0,
           "gravityScale": 1.0,
           "isSensor": false,
-          "uid": 1866
+          "uid": 1918
         }
       },
       {
@@ -66943,13 +66813,13 @@
             "x": 0.0,
             "y": 0.0
           },
-          "uid": 1867
+          "uid": 1919
         }
       },
       {
         "type": "main.components.Terrain",
         "properties": {
-          "uid": 1868
+          "uid": 1920
         }
       },
       {
@@ -66971,7 +66841,137 @@
           "keyCode": 70,
           "interactionID": 1,
           "debounce": 0.0,
-          "uid": 1869
+          "uid": 1921
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 616,
+    "doSerialization": true,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "main.engine.Transform",
+        "properties": {
+          "position": {
+            "x": 3.625,
+            "y": 0.875
+          },
+          "scale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 1916
+        }
+      },
+      {
+        "type": "main.components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 16.0,
+            "height": 16.0,
+            "texture": {
+              "filepath": "assets/images/decorationsAndBlocks.png",
+              "texID": 6,
+              "width": 112,
+              "height": 192
+            },
+            "texCoords": [
+              {
+                "x": 0.2857143,
+                "y": 0.8333333
+              },
+              {
+                "x": 0.2857143,
+                "y": 0.75
+              },
+              {
+                "x": 0.14285715,
+                "y": 0.75
+              },
+              {
+                "x": 0.14285715,
+                "y": 0.8333333
+              }
+            ]
+          },
+          "uid": 1917
+        }
+      },
+      {
+        "type": "physics2d.components.RigidBody2D",
+        "properties": {
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "angularDamping": 0.8,
+          "linearDamping": 0.9,
+          "mass": 0.0,
+          "bodyType": "Static",
+          "fixedRotation": false,
+          "continuousCollision": true,
+          "friction": 0.1,
+          "angularVelocity": 0.0,
+          "gravityScale": 1.0,
+          "isSensor": false,
+          "uid": 1918
+        }
+      },
+      {
+        "type": "physics2d.components.Box2DCollider",
+        "properties": {
+          "halfSize": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "origin": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "uid": 1919
+        }
+      },
+      {
+        "type": "main.components.Terrain",
+        "properties": {
+          "uid": 1920
+        }
+      },
+      {
+        "type": "main.components.Interaction",
+        "properties": {
+          "range": {
+            "x": 1.0,
+            "y": 1.0
+          },
+          "dimensions": {
+            "x": 1.0,
+            "y": 1.0
+          },
+          "color": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 1.0
+          },
+          "keyCode": 70,
+          "interactionID": 1,
+          "debounce": 0.0,
+          "uid": 1921
         }
       }
     ],
@@ -66995,7 +66995,7 @@
           },
           "rotation": 0.0,
           "zIndex": 0,
-          "uid": 1890
+          "uid": 1916
         }
       },
       {
@@ -67035,7 +67035,7 @@
               }
             ]
           },
-          "uid": 1891
+          "uid": 1917
         }
       },
       {
@@ -67055,7 +67055,7 @@
           "angularVelocity": 0.0,
           "gravityScale": 1.0,
           "isSensor": false,
-          "uid": 1892
+          "uid": 1918
         }
       },
       {
@@ -67073,13 +67073,13 @@
             "x": 0.0,
             "y": 0.0
           },
-          "uid": 1893
+          "uid": 1919
         }
       },
       {
         "type": "main.components.Terrain",
         "properties": {
-          "uid": 1894
+          "uid": 1920
         }
       },
       {
@@ -67101,7 +67101,7 @@
           "keyCode": 70,
           "interactionID": 1,
           "debounce": 0.0,
-          "uid": 1895
+          "uid": 1921
         }
       }
     ],
@@ -67116,7 +67116,7 @@
         "type": "main.engine.Transform",
         "properties": {
           "position": {
-            "x": 3.375,
+            "x": 4.125,
             "y": 0.875
           },
           "scale": {
@@ -67125,7 +67125,7 @@
           },
           "rotation": 0.0,
           "zIndex": 0,
-          "uid": 1890
+          "uid": 1916
         }
       },
       {
@@ -67165,7 +67165,7 @@
               }
             ]
           },
-          "uid": 1891
+          "uid": 1917
         }
       },
       {
@@ -67185,7 +67185,7 @@
           "angularVelocity": 0.0,
           "gravityScale": 1.0,
           "isSensor": false,
-          "uid": 1892
+          "uid": 1918
         }
       },
       {
@@ -67203,13 +67203,13 @@
             "x": 0.0,
             "y": 0.0
           },
-          "uid": 1893
+          "uid": 1919
         }
       },
       {
         "type": "main.components.Terrain",
         "properties": {
-          "uid": 1894
+          "uid": 1920
         }
       },
       {
@@ -67231,7 +67231,7 @@
           "keyCode": 70,
           "interactionID": 1,
           "debounce": 0.0,
-          "uid": 1895
+          "uid": 1921
         }
       }
     ],

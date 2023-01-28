@@ -127,6 +127,7 @@ public class Scene {
 		for(int i=0; i < gameObjects.size(); i++) {
 			GameObject go = gameObjects.get(i);
 			go.update(dt);
+
 			if(go.isDead()) {
 				gameObjects.remove(i);
 				this.renderer.destroyGameObject(go);
