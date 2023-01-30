@@ -3,6 +3,7 @@ package main.components;
 import main.engine.GameObject;
 import main.engine.Window;
 import main.engine.keyListener;
+import main.player.PlayerController;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import renderer.DebugDraw;

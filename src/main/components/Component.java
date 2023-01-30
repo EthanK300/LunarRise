@@ -21,23 +21,27 @@ public abstract class Component {
 	public transient GameObject gameObject = null;
 	
 	public void start() {
-		
+		//initialization method
 	}
 	
 	public void update(float dt) {
-		
+		//update on each cycle
 	}
 	
 	public void editorUpdate(float dt) {
-		
+		//update the editor window each cycle
 	}
 	
 	public void beginCollision(GameObject collidingObject, Contact contact, Vector2f hitNormal) {
-		
+		//which object am I colliding with?
+		//
+		//which direction did we hit it from
 	}
 	
 	public void endCollision(GameObject collidingObject, Contact contact, Vector2f hitNormal) {
-		
+		//which object am I colliding with?
+		//
+		//which direction did we hit it from
 	}
 	
 	public void preSolve(GameObject collidingObject, Contact contact, Vector2f hitNormal) {

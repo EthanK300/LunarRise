@@ -81,9 +81,9 @@ public class EngineContactListener implements ContactListener{
     public void preSolve(Contact contact, Manifold manifold) {
         GameObject objA = (GameObject)contact.getFixtureA().getUserData();
         GameObject objB = (GameObject)contact.getFixtureB().getUserData();
-        //world manifold gives us the contact and this like whic hfaces are we colliding on, gives in world coords aswell
+        //world manifold gives us the contact and this like which faces are we colliding on, gives in world coords as well
         WorldManifold worldManifold = new WorldManifold();
-        //uses the contact which we passed in and converts it to world coorrds
+        //uses the contact which we passed in and converts it to world coords
         contact.getWorldManifold(worldManifold);
         Vector2f aNormal = new Vector2f(worldManifold.normal.x, worldManifold.normal.y);
         Vector2f bNormal = new Vector2f(aNormal).negate();

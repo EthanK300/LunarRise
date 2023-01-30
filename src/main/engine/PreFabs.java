@@ -1,8 +1,7 @@
 package main.engine;
 
 import main.components.AnimationState;
-import main.components.PlayerController;
-import main.components.RigidBody;
+import main.player.PlayerController;
 import main.components.Sprite;
 import main.components.SpriteRenderer;
 import main.components.Spritesheet;
@@ -26,6 +25,8 @@ public class PreFabs {
 		return block;
 		
 	}
+
+
 	
 	public static GameObject generateCharacter() {
 		//requesting the player spritesheet from the asset pool
@@ -84,7 +85,7 @@ public class PreFabs {
         character.addComponent(rb);
         character.addComponent(pb);
         character.addComponent(new PlayerController());
-        
+
 		return character;
 		
 	}

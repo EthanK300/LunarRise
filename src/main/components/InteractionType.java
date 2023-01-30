@@ -4,6 +4,7 @@ public enum InteractionType {
     PlayerPlayer,
     PlayerObject,
     ObjectPlayer,
-    ObjectObject
+    ObjectObject,
+    OnHit
 
 }

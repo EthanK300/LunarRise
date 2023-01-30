@@ -1,6 +1,7 @@
 package main.components;
 
 
+import main.player.PlayerController;
 import org.joml.Vector4f;
 import main.engine.Camera;
 import main.engine.GameObject;

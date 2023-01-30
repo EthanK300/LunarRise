@@ -4,9 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="started interaction refactor">
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="refined">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/engine/ItemState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/player/Inventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/GameCamera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/GameCamera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/Interaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/Interaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/InteractionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/InteractionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/PlayerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/components/destroyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/destroyer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/detector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/detector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/engine/PreFabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/PreFabs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics2d/EngineContactListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics2d/EngineContactListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +30,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -126,6 +139,8 @@
       <workItem from="1674773602068" duration="2382000" />
       <workItem from="1674794961817" duration="26000" />
       <workItem from="1674860684648" duration="5907000" />
+      <workItem from="1675029393957" duration="2771000" />
+      <workItem from="1675054730094" duration="2126000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>
@@ -204,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674865096317</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refined">
+      <created>1674885883552</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1674885883552</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,9 +261,9 @@
     <MESSAGE value="added test interaction" />
     <MESSAGE value="added debounce to interactables and drawing capabilities" />
     <MESSAGE value="abstracted block creator" />
-    <MESSAGE value="refined" />
     <MESSAGE value="added interaction manager and it's list" />
     <MESSAGE value="started interaction refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="started interaction refactor" />
+    <MESSAGE value="refined" />
+    <option name="LAST_COMMIT_MESSAGE" value="refined" />
   </component>
 </project>

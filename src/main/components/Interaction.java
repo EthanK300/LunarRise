@@ -13,4 +13,5 @@ public abstract class Interaction extends Component{
 
     public abstract void selfUpdate(float dt);
     public abstract void selfStart();
+
 }

@@ -1,5 +1,8 @@
-package main.components;
+package main.player;
 
+import main.components.Component;
+import main.components.StateMachine;
+import main.components.Terrain;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -16,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 import org.jbox2d.dynamics.contacts.Contact;
 
-public class PlayerController extends Component{
+public class PlayerController extends Component {
 	
 	private enum PlayerState{
 		Small,
@@ -204,15 +207,16 @@ public class PlayerController extends Component{
 	}
 	**/
 	@Override
-	public void beginCollision(GameObject collidingObject, Contact contactt, Vector2f contactNormal) {
+	public void beginCollision(GameObject collidingObject, Contact contact, Vector2f contactNormal) {
 		if(isDead) {
 			return;
 		}
 		//if colliding with ground
 		if(collidingObject.getComponent(Terrain.class)!= null) {
-			if(Math.abs(contactNormal.x)> 0.8f ) {
+			//if the block hit is actually terrain
+			if(Math.abs(contactNormal.x)> 0.99f ) {
 				this.velocity.x = 0;
-			}else if(contactNormal.y > 0.8f) {
+			}else if(contactNormal.y > 0.99f) {
 				this.velocity.y = 0;
 				this.acceleration.y = 0;
 				this.jumpTime = 0;
