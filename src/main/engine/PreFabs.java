@@ -1,6 +1,7 @@
 package main.engine;
 
 import main.components.AnimationState;
+import main.player.Inventory;
 import main.player.PlayerController;
 import main.components.Sprite;
 import main.components.SpriteRenderer;
@@ -85,7 +86,7 @@ public class PreFabs {
         character.addComponent(rb);
         character.addComponent(pb);
         character.addComponent(new PlayerController());
-
+		character.addComponent(new Inventory());
 		return character;
 		
 	}
