@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="refactoring item system">
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="started item system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/engine/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/items/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/player/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/util/settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/util/settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scenes/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/engine/PreFabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/PreFabs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/player/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/Inventory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +65,6 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/awalk_/IntelliJ/LunarRise&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -132,7 +129,8 @@
       <workItem from="1674794961817" duration="26000" />
       <workItem from="1674860684648" duration="5907000" />
       <workItem from="1675029393957" duration="2771000" />
-      <workItem from="1675054730094" duration="2126000" />
+      <workItem from="1675054730094" duration="2352000" />
+      <workItem from="1675142706986" duration="926000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>
@@ -218,12 +216,12 @@
       <option name="project" value="LOCAL" />
       <updated>1674885883552</updated>
     </task>
-    <task id="LOCAL-00013" summary="refactoring item system">
-      <created>1675275561894</created>
+    <task id="LOCAL-00013" summary="started item system">
+      <created>1675057047522</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1675275561894</updated>
+      <updated>1675057047522</updated>
     </task>
     <option name="localTasksCounter" value="14" />
     <servers />
@@ -263,7 +261,7 @@
     <MESSAGE value="added interaction manager and it's list" />
     <MESSAGE value="started interaction refactor" />
     <MESSAGE value="refined" />
-    <MESSAGE value="refactoring item system" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring item system" />
+    <MESSAGE value="started item system" />
+    <option name="LAST_COMMIT_MESSAGE" value="started item system" />
   </component>
 </project>
