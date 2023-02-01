@@ -14,7 +14,7 @@ public abstract class Item{
     private static final GameObject player = Window.getScene().getGameObjectWith(PlayerController.class);
     public Vector2f pos;
     public String name;
-    public static Vector2f range = settings.acquireItemRange;
+    public static final Vector2f range = settings.acquireItemRange;
     public Vector2f dimensions;
     public boolean inScene;
 
