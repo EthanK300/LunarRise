@@ -43,9 +43,8 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		levelEditorStuff.addComponent(new GridLines());
 		levelEditorStuff.addComponent(new EditorCamera(scene.camera()));
 		levelEditorStuff.addComponent(new GizmoSystem(gizmos));
-
 		scene.addGameObjectToScene(levelEditorStuff);
-		//TODO: TIMESTAMP: 8:34:41, create a new spritesheet for map textures
+		//TODO: TIMESTAMP: 8:34:41, create a new sprite sheet for map textures
 
 		
 	}

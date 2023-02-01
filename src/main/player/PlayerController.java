@@ -3,6 +3,7 @@ package main.player;
 import main.components.Component;
 import main.components.StateMachine;
 import main.components.Terrain;
+import main.engine.Item;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -18,6 +19,8 @@ import renderer.DebugDraw;
 import static org.lwjgl.glfw.GLFW.*;
 
 import org.jbox2d.dynamics.contacts.Contact;
+
+import java.util.List;
 
 public class PlayerController extends Component {
 	
@@ -40,6 +43,7 @@ public class PlayerController extends Component {
 	private transient float groundDebounceTime = 0.1f;
 	private transient RigidBody2D rb;
 	private transient StateMachine stateMachine;
+	private List<Item> items;
 	private transient float megaJumpBoostFactor = settings.megaJumpBoostFactor;
 	private transient float playerWidth = 0.25f;
 	private transient float playerHeight = 0.25f;
@@ -49,6 +53,7 @@ public class PlayerController extends Component {
 	private transient boolean isDead = false;
 	private transient int enemyBounce = 0;
 	private boolean controlsActive;
+	private int MAX_SIZE = settings.inventorySize;
 	
 	@Override
 	public void start() {
@@ -221,6 +226,30 @@ public class PlayerController extends Component {
 				this.acceleration.y = 0;
 				this.jumpTime = 0;
 			}
+		}
+	}
+	public boolean addItemInv(Item item){
+		if(items.size() >= MAX_SIZE){
+			items.remove(item);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public boolean removeItemInv(Item item){
+		if(items.contains(item)){
+			items.remove(item);
+			return true;
+		}else{
+			//inventory does not contain item
+			return false;
+		}
+	}
+	public boolean hasItemInv(Item item){
+		if(items.contains(item)){
+			return true;
+		}else{
+			return false;
 		}
 	}
 	

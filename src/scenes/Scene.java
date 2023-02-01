@@ -8,17 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import main.engine.*;
 import org.joml.Vector2f;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import main.components.Component;
-import main.engine.Camera;
-import main.engine.ComponentDeserializer;
-import main.engine.GameObject;
-import main.engine.GameObjectDeserializer;
-import main.engine.Transform;
 import physics2d.Physics2D;
 import renderer.Renderer;
 
@@ -29,6 +25,7 @@ public class Scene {
 	private boolean isRunning;
 	private List<GameObject> gameObjects;
 	private List<GameObject> pendingObjects;
+	private List<Item> items;
 	private Physics2D physics2D;
 	
 	private SceneInitializer sceneInitializer;
@@ -40,6 +37,7 @@ public class Scene {
 		this.gameObjects = new ArrayList<>();
 		this.pendingObjects = new ArrayList<>();
 		this.isRunning = false;
+		this.items = new ArrayList<>();
 	}
 	
 	public Physics2D getPhysics() {
@@ -58,6 +56,9 @@ public class Scene {
 			go.start();
 			this.renderer.add(go);
 			this.physics2D.add(go);
+		}
+		for(Item item : items){
+			item.start();
 		}
 		isRunning = true;
 	}
@@ -134,6 +135,9 @@ public class Scene {
 				this.physics2D.destroyGameObject(go);
 				i--;
 			}
+		}
+		for(Item item : items){
+			item.update(dt);
 		}
 		
 		for(GameObject obj : pendingObjects) {

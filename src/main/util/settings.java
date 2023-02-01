@@ -15,6 +15,7 @@ public class settings {
 	public static float slowDownForce = 0.05f;
 	public static float megaJumpBoostFactor = 1.0f;
 	public static Vector2f terminalVelocitry = new Vector2f(2.1f, 3.1f);
+	public static int inventorySize = 23;
 
 	//camera settings
 	public static Vector4f cameraThreshold = new Vector4f(3.0f, 2.0f, 2.0f, 1.0f);

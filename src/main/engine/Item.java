@@ -1,5 +1,8 @@
 package main.engine;
 
-public class Item{
+public abstract class Item{
+    public abstract void update(float dt);
+    public abstract void start();
+
     
 }
