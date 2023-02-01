@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import main.engine.*;
+import main.items.Item;
 import org.joml.Vector2f;
 
 import com.google.gson.Gson;

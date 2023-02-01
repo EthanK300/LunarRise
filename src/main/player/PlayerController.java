@@ -3,14 +3,13 @@ package main.player;
 import main.components.Component;
 import main.components.StateMachine;
 import main.components.Terrain;
-import main.engine.Item;
+import main.items.Item;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import main.engine.GameObject;
 import main.engine.Window;
 import main.engine.keyListener;
-import main.util.AssetPool;
 import main.util.settings;
 import physics2d.RaycastInfo;
 import physics2d.components.RigidBody2D;
@@ -20,6 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 import org.jbox2d.dynamics.contacts.Contact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerController extends Component {
@@ -43,7 +43,6 @@ public class PlayerController extends Component {
 	private transient float groundDebounceTime = 0.1f;
 	private transient RigidBody2D rb;
 	private transient StateMachine stateMachine;
-	private List<Item> items;
 	private transient float megaJumpBoostFactor = settings.megaJumpBoostFactor;
 	private transient float playerWidth = 0.25f;
 	private transient float playerHeight = 0.25f;
@@ -54,14 +53,21 @@ public class PlayerController extends Component {
 	private transient int enemyBounce = 0;
 	private boolean controlsActive;
 	private int MAX_SIZE = settings.inventorySize;
+	private Vector2f pos;
+	private GameObject player;
+	private Vector2f acquireItemRange = settings.acquireItemRange;
+	private List<Item> items;
 	
 	@Override
 	public void start() {
-		//attach everything to gameobject
+		//attach everything to game object
 		this.rb = gameObject.getComponent(RigidBody2D.class);
 		this.stateMachine = gameObject.getComponent(StateMachine.class);
 		this.rb.setGravityScale(0.0f);
 		this.controlsActive = true;
+		this.player = Window.getScene().getGameObjectWith(PlayerController.class);
+		this.pos = this.gameObject.transform.position;
+		this.items = new ArrayList<>();
 	}
 	
 	public boolean hasWon() {
@@ -121,7 +127,7 @@ public class PlayerController extends Component {
 		if(this.velocity.x == 0) {
 			//this.stateMachine.trigger("stopRunning");//TODO: create this animation state
 		}
-		//check if               on ground
+		//check if on ground
 		checkOnGround();
 		//checkOnLeft();
 		if((keyListener.isKeyPressed(GLFW_KEY_SPACE) || keyListener.isKeyPressed(GLFW_KEY_UP)) && (jumpTime > 0 || onGround || groundDebounce > 0)){
@@ -168,7 +174,6 @@ public class PlayerController extends Component {
 		}else {
 			//stateMachine.trigger("stopJumping");//TODO:create animation
 		}
-		
 	}
 	
 	public void checkOnGround() {
@@ -230,7 +235,7 @@ public class PlayerController extends Component {
 	}
 	public boolean addItemInv(Item item){
 		if(items.size() >= MAX_SIZE){
-			items.remove(item);
+			items.add(item);
 			return true;
 		}else{
 			return false;
@@ -245,13 +250,5 @@ public class PlayerController extends Component {
 			return false;
 		}
 	}
-	public boolean hasItemInv(Item item){
-		if(items.contains(item)){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
 	
 }
