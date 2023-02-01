@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="started item system">
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="refactored item system, need abstraction for items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/engine/PreFabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/PreFabs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/player/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/items/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/items/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/player/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/PlayerController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,6 +262,7 @@
     <MESSAGE value="started interaction refactor" />
     <MESSAGE value="refined" />
     <MESSAGE value="started item system" />
-    <option name="LAST_COMMIT_MESSAGE" value="started item system" />
+    <MESSAGE value="refactored item system, need abstraction for items" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored item system, need abstraction for items" />
   </component>
 </project>

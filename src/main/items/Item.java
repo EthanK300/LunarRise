@@ -11,12 +11,12 @@ import renderer.DebugDraw;
 
 //michael.mackrory@nike.com
 public abstract class Item{
-    private GameObject player = Window.getScene().getGameObjectWith(PlayerController.class);
+    private static final GameObject player = Window.getScene().getGameObjectWith(PlayerController.class);
     public Vector2f pos;
     public String name;
-    public Vector2f range = settings.acquireItemRange;
+    public static Vector2f range = settings.acquireItemRange;
     public Vector2f dimensions;
-    public boolean inScene = true;
+    public boolean inScene;
 
     public Vector3f color;
     public Item(Vector2f position, String name, Vector2f dimensions, Vector3f color, boolean startInScene){
@@ -39,6 +39,7 @@ public abstract class Item{
                 //attempted pickup
                 if(player.getComponent(PlayerController.class).addItemInv(this)){
                     this.inScene = false;
+                    System.out.println("added " + this.name + " to inventory");
                     //added item to inventory
                 }else{
                     DebugDraw.addBox2D(pos, new Vector2f(dimensions.x / 4, dimensions.y / 4), 0.0f, new Vector3f(1.0f,0.0f,0.0f), 1);
@@ -47,6 +48,4 @@ public abstract class Item{
             }
         }
     }
-
-    
 }
