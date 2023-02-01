@@ -23,19 +23,19 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 	private Spritesheet sprites;
 	//SpriteRenderer obj1Sprite;
 	private GameObject levelEditorStuff;
-	
+
 	public levelEditorSceneInitializer() {
 
 	}
-	
+
 	@Override
 	public void init(Scene scene) {
-		
-		
+
+
 		sprites = AssetPool.getSpritesheet("assets/images/decorationsAndBlocks.png");
-		
+
 		Spritesheet gizmos = AssetPool.getSpritesheet("assets/images/gizmos.png");
-		
+
 		levelEditorStuff = scene.createGameObject("LevelEditor");
 		levelEditorStuff.setNoSerialize();
 		levelEditorStuff.addComponent(new MouseControls());
@@ -43,31 +43,30 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		levelEditorStuff.addComponent(new GridLines());
 		levelEditorStuff.addComponent(new EditorCamera(scene.camera()));
 		levelEditorStuff.addComponent(new GizmoSystem(gizmos));
-
 		scene.addGameObjectToScene(levelEditorStuff);
-		//TODO: TIMESTAMP: 8:34:41, create a new spritesheet for map textures
+		//TODO: TIMESTAMP: 8:34:41, create a new sprite sheet for map textures
 
-		
+
 	}
 	@Override
 	public void loadResources(Scene scene) {
 		AssetPool.getShader("assets/shaders/default.glsl");
-		
+
 		AssetPool.addSpriteSheet("assets/images/playerSprites.png",
 				new Spritesheet(AssetPool.getTexture("assets/images/playerSprites.png"), 16, 16, 81, 0));//change 16,16,81 to respective size and num of sprites
-		
+
 		//TODO: add new spritesheet with player character models
-		
+
 		AssetPool.addSpriteSheet("assets/images/decorationsAndBlocks.png",
 				new Spritesheet(AssetPool.getTexture("assets/images/decorationsAndBlocks.png"), 16, 16, 81, 0));
-				//TODO: TIMESTAMP: 8:57:01, substitute "16" for sprite size
+		//TODO: TIMESTAMP: 8:57:01, substitute "16" for sprite size
 		AssetPool.addSpriteSheet("assets/images/gizmos.png", new Spritesheet(AssetPool.getTexture("assets/images/gizmos.png"), 24, 48, 3, 0));
-		
+
 		AssetPool.getTexture("assets/images/blendImage2.png");
 
 		//TODO:add all sounds, this one doesn't work yet
 		//AssetPool.addSound("assets/sounds/test.ogg", false);
-		
+
 		for(GameObject g : scene.getGameObjects()) {
 			if(g.getComponent(SpriteRenderer.class) != null) {
 				SpriteRenderer spr = g.getComponent(SpriteRenderer.class);
@@ -75,27 +74,27 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 					spr.setTexture(AssetPool.getTexture(spr.getTexture().getFilepath()));
 				}
 			}
-			
+
 			if(g.getComponent(StateMachine.class) != null) {
 				StateMachine stateMachine = g.getComponent(StateMachine.class);
 				stateMachine.refreshTextures();
 			}
 		}
-		
+
 	}
-	
-	
+
+
 	@Override
 	public void imgui() {
 		/**
-		System.out.println("x: " + mouseListener.getScreenX());
-		System.out.println("y: " + mouseListener.getScreenY());
-		**/
+		 System.out.println("x: " + mouseListener.getScreenX());
+		 System.out.println("y: " + mouseListener.getScreenY());
+		 **/
 		ImGui.begin("Level Editor Stuff");
 		levelEditorStuff.imGui();
 		ImGui.end();
 		ImGui.begin("Objects");
-		
+
 		if(ImGui.beginTabBar("WindowTabBar")) {
 			//tab for blocks
 			if(ImGui.beginTabItem("Blocks")) {
@@ -105,28 +104,28 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 				ImGui.getWindowSize(windowSize);
 				ImVec2 itemSpacing = new ImVec2();
 				ImGui.getStyle().getItemSpacing(itemSpacing);
-				
+
 				float windowX2 = windowPos.x + windowSize.x;
 				for (int i = 0; i < sprites.size(); i++) {
-					
+
 					//add sprites from the appropriate spritesheet that you want to not have box colliders
 					/**
-					 * format: 
+					 * format:
 					 * if(i == texture's index) continue;
 					 */
-					
+
 					Sprite sprite = sprites.getSprite(i);
 					float spriteWidth = sprite.getWidth() * 4;
 					float spriteHeight = sprite.getHeight() * 4;
 					int id = sprite.getTexId();
 					Vector2f[] texCoords = sprite.getTexCoords();
-					
+
 					ImGui.pushID(i);
 					if(ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
 						addBlock2D(sprite, i);
 					}
 					ImGui.popID();
-					
+
 					ImVec2 lastButtonPos = new ImVec2();
 					ImGui.getItemRectMax(lastButtonPos);
 					float lastButtonX2 = lastButtonPos.x;
@@ -134,11 +133,11 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 					if(i + 1 < sprites.size() && nextButtonX2 < windowX2) {
 						ImGui.sameLine();
 					}
-					
+
 				}
 				ImGui.endTabItem();
 			}
-			
+
 			if(ImGui.beginTabItem("Prefabs")) {
 				Spritesheet playerSprites = AssetPool.getSpritesheet("assets/images/playerSprites.png");
 				Sprite sprite = playerSprites.getSprite(0);
@@ -149,13 +148,13 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 				if(ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
 					GameObject object = PreFabs.generateCharacter();//generated sprite size
 					levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
-					
+
 				}
-				
+
 				ImGui.sameLine();
 				ImGui.endTabItem();
 			}
-			
+
 			//tab for sounds
 			if(ImGui.beginTabItem("Sounds")) {
 				Collection<Sound> sounds = AssetPool.getAllSounds();
@@ -168,20 +167,20 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 							sound.stop();
 						}
 					}
-					
+
 					if(ImGui.getContentRegionAvailX() > 100) {
 						ImGui.sameLine();
 					}
 				}
 				ImGui.endTabItem();
 			}
-			
+
 			ImGui.endTabBar();
-			
+
 		}
-		
-		
-		
+
+
+
 		ImGui.end();
 	}
 
@@ -227,5 +226,5 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
 
 	}
-	
+
 }
