@@ -202,11 +202,14 @@ public class PlayerController extends Component {
 	 float yVal = playerState == PlayerState.Small ? -0.14f : -0.24f;//0.14f and 0.24f are values for big and small character due to powerups(for raycasting)
 	 Vector2f raycastEnd = new Vector2f(raycastBegin).add(0.0f, yVal);
 	 RaycastInfo info = Window.getPhysics().raycast(gameObject, raycastBegin, raycastEnd);
+
 	 Vector2f raycast2Begin = new Vector2f(raycastBegin).add(0.0f, innerPlayerHeight);
 	 Vector2f raycast2End = new Vector2f(raycastEnd).add(0.0f, innerPlayerHeight);
 	 RaycastInfo info2 = Window.getPhysics().raycast(gameObject, raycast2Begin, raycast2End);
+
 	 onGround = (info.hit && info.hitObject != null && info.hitObject.getComponent(Terrain.class) != null) ||
 	 (info2.hit && info2.hitObject != null && info2.hitObject.getComponent(Terrain.class) != null);
+
 	 DebugDraw.addLine2D(raycastBegin, raycastEnd, new Vector3f(1, 0, 0));
 	 DebugDraw.addLine2D(raycast2Begin, raycast2End, new Vector3f(1, 0, 0));
 	 }

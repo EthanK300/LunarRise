@@ -140,7 +140,6 @@ public class Scene {
 		for(Item item : items){
 			item.update(dt);
 		}
-
 		for(GameObject obj : pendingObjects) {
 			gameObjects.add(obj);
 			obj.start();

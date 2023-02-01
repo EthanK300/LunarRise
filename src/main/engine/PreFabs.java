@@ -38,7 +38,6 @@ public class PreFabs {
 		//basic framework for animation
 		/**
 		 * define animation
-		 * 
 		 * give animation a title
 		 * give animation a speed
 		 * add each frame IN ORDER for animation
@@ -85,7 +84,6 @@ public class PreFabs {
         character.addComponent(rb);
         character.addComponent(pb);
         character.addComponent(new PlayerController());
-
 		return character;
 		
 	}

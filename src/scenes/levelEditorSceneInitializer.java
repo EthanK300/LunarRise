@@ -45,8 +45,6 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		levelEditorStuff.addComponent(new GizmoSystem(gizmos));
 		scene.addGameObjectToScene(levelEditorStuff);
 		//TODO: TIMESTAMP: 8:34:41, create a new sprite sheet for map textures
-
-
 	}
 	@Override
 	public void loadResources(Scene scene) {
