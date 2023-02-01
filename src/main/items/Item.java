@@ -17,6 +17,7 @@ public abstract class Item{
     public static Vector2f range = settings.acquireItemRange;
     public Vector2f dimensions;
     public boolean inScene;
+
     public Vector3f color;
     public Item(Vector2f position, String name, Vector2f dimensions, Vector3f color, boolean startInScene){
         this.name = name;

@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="refined">
-      <change afterPath="$PROJECT_DIR$/src/main/items/Item.java" afterDir="false" />
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="fix commit structure 1">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/engine/Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/player/Inventory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/player/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/util/settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/util/settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scenes/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/items/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/items/Item.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674885883552</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix commit structure 1">
+      <created>1675285135865</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1675285135865</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +260,7 @@
     <MESSAGE value="added interaction manager and it's list" />
     <MESSAGE value="started interaction refactor" />
     <MESSAGE value="refined" />
-    <option name="LAST_COMMIT_MESSAGE" value="refined" />
+    <MESSAGE value="fix commit structure 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix commit structure 1" />
   </component>
 </project>
