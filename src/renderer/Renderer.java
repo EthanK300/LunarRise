@@ -6,6 +6,7 @@ import java.util.List;
 
 import main.components.SpriteRenderer;
 import main.engine.GameObject;
+import main.engine.Item;
 
 public class Renderer {
 	
@@ -19,6 +20,12 @@ public class Renderer {
 	
 	public void add(GameObject go) {
 		SpriteRenderer spr = go.getComponent(SpriteRenderer.class);
+		if(spr != null) {
+			add(spr);
+		}
+	}
+	public void add(Item it) {
+		SpriteRenderer spr = it.getComponent(SpriteRenderer.class);
 		if(spr != null) {
 			add(spr);
 		}
@@ -52,6 +59,16 @@ public class Renderer {
 		}
 		for(RenderBatch batch : batches) {
 			if(batch.destroyIfExists(go)){
+				return;
+			}
+		}
+	}
+	public void destroyItem(Item it) {
+		if(it.getComponent(SpriteRenderer.class) == null) {
+			return;
+		}
+		for(RenderBatch batch : batches) {
+			if(batch.destroyIfExists(it)){
 				return;
 			}
 		}

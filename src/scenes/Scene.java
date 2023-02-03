@@ -8,31 +8,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import main.engine.*;
+import main.player.PlayerController;
 import org.joml.Vector2f;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import main.components.Component;
-import main.engine.Camera;
-import main.engine.ComponentDeserializer;
-import main.engine.GameObject;
-import main.engine.GameObjectDeserializer;
-import main.engine.Transform;
 import physics2d.Physics2D;
 import renderer.Renderer;
 
 public class Scene {
-	
+
 	private Renderer renderer;
 	private Camera camera;
 	private boolean isRunning;
 	private List<GameObject> gameObjects;
 	private List<GameObject> pendingObjects;
+	private List<Item> items;
+	private List<Item> pendingItems;
 	private Physics2D physics2D;
-	
+
 	private SceneInitializer sceneInitializer;
-	
+
 	public Scene(SceneInitializer sceneInitializer) {
 		this.sceneInitializer = sceneInitializer;
 		this.physics2D = new Physics2D();
@@ -40,18 +39,20 @@ public class Scene {
 		this.gameObjects = new ArrayList<>();
 		this.pendingObjects = new ArrayList<>();
 		this.isRunning = false;
+		this.items = new ArrayList<>();
+		this.pendingItems = new ArrayList<>();
 	}
-	
+
 	public Physics2D getPhysics() {
 		return this.physics2D;
 	}
-	
+
 	public void init() {
 		this.camera = new Camera(new Vector2f(0,0));
 		this.sceneInitializer.loadResources(this);
 		this.sceneInitializer.init(this);
 	}
-	
+
 	public void start() {
 		for(int i=0; i < gameObjects.size(); i++) {
 			GameObject go = gameObjects.get(i);
@@ -59,9 +60,14 @@ public class Scene {
 			this.renderer.add(go);
 			this.physics2D.add(go);
 		}
+		for(int i=0; i < items.size(); i++){
+			Item it = items.get(i);
+			it.start();
+			this.renderer.add(it);
+		}
 		isRunning = true;
 	}
-	
+
 	public void addGameObjectToScene(GameObject go) {
 		if(!isRunning) {
 			gameObjects.add(go);
@@ -69,37 +75,64 @@ public class Scene {
 			pendingObjects.add(go);
 		}
 	}
-	
+	public void addItemToScene(Item it) {
+		if(!isRunning) {
+			items.add(it);
+		}else {
+			pendingItems.add(it);
+		}
+	}
+
 	public void destroy() {
 		for(GameObject go : gameObjects) {
 			go.destroy();
 		}
+		for(Item it : items) {
+			it.destroy();
+		}
 	}
-	
+
 	public <T extends Component> GameObject getGameObjectWith(Class<T> correctClass) {
 		for(GameObject go : gameObjects) {
 			if(go.getComponent(correctClass) != null) {
 				return go;
 			}
 		}
-		
+
 		return null;
 	}
-	
+	public <T extends Component> Item getItemWith(Class<T> correctClass) {
+		for(Item it : items) {
+			if(it.getComponent(correctClass) != null) {
+				return it;
+			}
+		}
+
+		return null;
+	}
+
 	public List<GameObject> getGameObjects(){
 		return this.gameObjects;
 	}
-	
+	public List<Item> getItems(){
+		return this.items;
+	}
+
 	public GameObject getGameObject(int gameObjectId) {
 		Optional<GameObject> result = this.gameObjects.stream()
 				.filter(gameObject -> gameObject.getUid() == gameObjectId).findFirst();
 		return result.orElse(null);
 	}
-	
+	public Item getItem(int itemId) {
+		Optional<Item> result = this.items.stream()
+				.filter(item -> item.getUid() == itemId).findFirst();
+		return result.orElse(null);
+	}
+
 	public void editorUpdate(float dt) {
-		
+
 		this.camera.adjustProjection();
-		
+
 		for(int i=0; i < gameObjects.size(); i++) {
 			GameObject go = gameObjects.get(i);
 			go.editorUpdate(dt);
@@ -109,7 +142,7 @@ public class Scene {
 				this.physics2D.destroyGameObject(go);
 				i--;
 			}
-			
+
 			for(GameObject obj : pendingObjects) {
 				gameObjects.add(obj);
 				obj.start();
@@ -118,8 +151,24 @@ public class Scene {
 			}
 			pendingObjects.clear();
 		}
+		for(int i=0; i < items.size(); i++) {
+			Item it = items.get(i);
+			it.editorUpdate(dt);
+			if(it.isDead()) {
+				items.remove(i);
+				this.renderer.destroyItem(it);
+				i--;
+			}
+
+			for(Item item : pendingItems) {
+				items.add(item);
+				item.start();
+				this.renderer.add(item);
+			}
+			pendingItems.clear();
+		}
 	}
-	
+
 	public void update(float dt) {
 		this.camera.adjustProjection();
 		this.physics2D.update(dt);
@@ -135,17 +184,33 @@ public class Scene {
 				i--;
 			}
 		}
-		
+		for(int i=0; i < items.size(); i++){
+			Item it = items.get(i);
+			it.update(dt);
+
+			if(it.isDead()){
+				items.remove(i);
+				this.renderer.destroyItem(it);
+				i--;
+			}
+		}
+
 		for(GameObject obj : pendingObjects) {
 			gameObjects.add(obj);
 			obj.start();
 			this.renderer.add(obj);
 			this.physics2D.add(obj);
 		}
+		for(Item item : pendingItems) {
+			items.add(item);
+			item.start();
+			this.renderer.add(item);
+		}
 		pendingObjects.clear();
-		
+		pendingItems.clear();
+
 	}
-	
+
 	public void render() {
 		this.renderer.render();
 	}
@@ -153,35 +218,56 @@ public class Scene {
 	public Camera camera() {
 		return this.camera;
 	}
-	
+
 	public void imgui() {
 		this.sceneInitializer.imgui();
 	}
-	
+
 	public GameObject createGameObject(String name) {
 		GameObject go = new GameObject(name);
 		go.addComponent(new Transform());
 		go.transform = go.getComponent(Transform.class);
 		return go;
 	}
+	public Item createItem(String name, Item i) {
+		try {
+			Item it = i.getClass().newInstance();
+			it.addComponent(new Transform());
+			it.transform = it.getComponent(Transform.class);
+			return it;
+		}catch(Exception e){
+			e.printStackTrace();
+			assert false: "Error creating item instance object";
+			return null;
+		}
+	}
+
 	
 	public void save() {
 		Gson gson  = new GsonBuilder()
 				.setPrettyPrinting()
 				.registerTypeAdapter(Component.class, new ComponentDeserializer())
 				.registerTypeAdapter(GameObject.class , new GameObjectDeserializer())
+				.registerTypeAdapter(Item.class, new ItemDeserializer())
 				.enableComplexMapKeySerialization()
 				.create();
 		
 		try {
 			FileWriter writer = new FileWriter("level.txt");
 			List<GameObject> objsToSerialize = new ArrayList<>();
+			List<Item> itemsToSerialize = new ArrayList<>();
 			for(GameObject obj : this.gameObjects) {
 				if(obj.doSerialization()) {
 					objsToSerialize.add(obj);
 				}
 			}
+			for(Item item : this.items){
+				if(item.doSerialization()){
+					itemsToSerialize.add(item);
+				}
+			}
 			writer.write(gson.toJson(objsToSerialize));
+			writer.write(gson.toJson(itemsToSerialize));
 			writer.close();
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -193,6 +279,7 @@ public class Scene {
 				.setPrettyPrinting()
 				.registerTypeAdapter(Component.class, new ComponentDeserializer())
 				.registerTypeAdapter(GameObject.class , new GameObjectDeserializer())
+				.registerTypeAdapter(Item.class, new ItemDeserializer())
 				.enableComplexMapKeySerialization()
 				.create();
 		String inFile = "";
@@ -220,6 +307,19 @@ public class Scene {
 					maxGoId = objs[i].getUid();
 				}
 			}
+			Item[] items = gson.fromJson(inFile, Item[].class);
+			for(int i=0; i < items.length; i++){
+				addItemToScene(items[i]);
+
+				for(Component c : items[i].getAllComponents()){
+					if(c.getUid() > maxCompId){
+						maxCompId = c.getUid();
+					}
+				}
+				if(items[i].getUid() > maxGoId) {
+					maxGoId = items[i].getUid();
+				}
+			}
 			
 			maxGoId++;
 			maxCompId++;
@@ -227,6 +327,7 @@ public class Scene {
 			//System.out.println(maxCompId);
 			GameObject.init(maxGoId);
 			Component.init(maxCompId);
+			Item.init(maxCompId);
 		}
 	}
 	

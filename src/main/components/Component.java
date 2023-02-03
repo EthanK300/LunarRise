@@ -3,6 +3,7 @@ package main.components;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import main.engine.Item;
 import org.jbox2d.dynamics.contacts.Contact;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -19,6 +20,7 @@ public abstract class Component {
 	private int uid = -1;
 	
 	public transient GameObject gameObject = null;
+	public transient Item item = null;
 	
 	public void start() {
 		//initialization method
