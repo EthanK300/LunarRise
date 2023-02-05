@@ -26,7 +26,15 @@ public class PreFabs {
 		
 	}
 
-
+	public static Item generateItem(Sprite sprite, float sizeX, float sizeY) {
+		Item it = Window.getScene().createItem("Item");
+		it.transform.scale.x = sizeX;
+		it.transform.scale.y = sizeY;
+		SpriteRenderer renderer = new SpriteRenderer();
+		renderer.setSprite(sprite);
+		it.addComponent(renderer);
+		return it;
+	}
 	
 	public static GameObject generateCharacter() {
 		//requesting the player spritesheet from the asset pool

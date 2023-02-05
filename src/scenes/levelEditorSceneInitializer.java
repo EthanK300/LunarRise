@@ -87,6 +87,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 	
 	@Override
 	public void imgui() {
+		//TODO: add item creator
 		/**
 		System.out.println("x: " + mouseListener.getScreenX());
 		System.out.println("y: " + mouseListener.getScreenY());
@@ -137,6 +138,9 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 					
 				}
 				ImGui.endTabItem();
+			}
+			if(ImGui.beginTabItem("Items")) {
+				
 			}
 			
 			if(ImGui.beginTabItem("Prefabs")) {

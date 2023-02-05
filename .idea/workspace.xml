@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="fix commit structure 1">
-      <change afterPath="$PROJECT_DIR$/src/main/engine/ItemDeserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/components/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/engine/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RenderBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RenderBatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Renderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/engine/ItemDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/ItemDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/engine/PreFabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/PreFabs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +108,7 @@
       <list>
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -134,6 +134,9 @@
       <workItem from="1674860684648" duration="5907000" />
       <workItem from="1675029393957" duration="2771000" />
       <workItem from="1675054730094" duration="2126000" />
+      <workItem from="1675547078123" duration="8704000" />
+      <workItem from="1675573729807" duration="867000" />
+      <workItem from="1675634776934" duration="1174000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>

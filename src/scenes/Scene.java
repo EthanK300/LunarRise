@@ -229,17 +229,33 @@ public class Scene {
 		go.transform = go.getComponent(Transform.class);
 		return go;
 	}
-	public Item createItem(String name, Item i) {
+	public Item createItem(String name) {
 		try {
-			Item it = i.getClass().newInstance();
-			it.addComponent(new Transform());
-			it.transform = it.getComponent(Transform.class);
+			Item it = (Item)Class.forName(name).getDeclaredConstructor().newInstance();
+			attach(it);
 			return it;
+			/**
+			 * switch(itemIndex){
+			 * 				case 0:
+			 *
+			 * 				case 1:
+			 * 					//add cases for
+			 * 				default:
+			 * 					assert false: "Could not load specific item class";
+			 * 					return null;
+			 *                        }
+			 */
+
 		}catch(Exception e){
 			e.printStackTrace();
 			assert false: "Error creating item instance object";
 			return null;
 		}
+	}
+	private Item attach(Item it){
+		it.addComponent(new Transform());
+		it.transform = it.getComponent(Transform.class);
+		return it;
 	}
 
 	
