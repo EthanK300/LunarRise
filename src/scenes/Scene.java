@@ -26,7 +26,6 @@ public class Scene {
 	private boolean isRunning;
 	private List<GameObject> gameObjects;
 	private List<GameObject> pendingObjects;
-	private List<Item> items;
 	private Physics2D physics2D;
 
 	private SceneInitializer sceneInitializer;
@@ -38,7 +37,6 @@ public class Scene {
 		this.gameObjects = new ArrayList<>();
 		this.pendingObjects = new ArrayList<>();
 		this.isRunning = false;
-		this.items = new ArrayList<>();
 	}
 
 	public Physics2D getPhysics() {
@@ -57,9 +55,6 @@ public class Scene {
 			go.start();
 			this.renderer.add(go);
 			this.physics2D.add(go);
-		}
-		for(Item item : items){
-			item.start();
 		}
 		isRunning = true;
 	}
@@ -137,9 +132,7 @@ public class Scene {
 				i--;
 			}
 		}
-		for(Item item : items){
-			item.update(dt);
-		}
+
 		for(GameObject obj : pendingObjects) {
 			gameObjects.add(obj);
 			obj.start();

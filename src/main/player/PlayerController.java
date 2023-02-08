@@ -53,10 +53,10 @@ public class PlayerController extends Component {
 	private transient int enemyBounce = 0;
 	private boolean controlsActive;
 	private int MAX_SIZE = settings.inventorySize;
+	private List<Item> inventory;
 	private Vector2f pos;
 	private GameObject player;
 	private Vector2f acquireItemRange = settings.acquireItemRange;
-	private List<Item> items;
 
 	@Override
 	public void start() {
@@ -66,7 +66,7 @@ public class PlayerController extends Component {
 		this.rb.setGravityScale(0.0f);
 		this.controlsActive = true;
 		this.pos = this.gameObject.transform.position;
-		this.items = new ArrayList<>();
+		this.inventory = new ArrayList<>();
 	}
 
 	public boolean hasWon() {
@@ -229,16 +229,19 @@ public class PlayerController extends Component {
 		}
 	}
 	public boolean addItemInv(Item item){
-		if(items.size() >= MAX_SIZE){
-			items.add(item);
+		if(inventory.size() >= MAX_SIZE){
+			inventory.add(item);
+			item.inScene = false;
 			return true;
 		}else{
+			item.inScene = true;
 			return false;
 		}
 	}
 	public boolean removeItemInv(Item item){
-		if(items.contains(item)){
-			items.remove(item);
+		if(inventory.contains(item)){
+			inventory.remove(item);
+			item.inScene = true;
 			return true;
 		}else{
 			//inventory does not contain item
@@ -246,7 +249,7 @@ public class PlayerController extends Component {
 		}
 	}
 	public boolean itemInInv(Item item){
-		return items.contains(item);
+		return inventory.contains(item);
 	}
 
 }

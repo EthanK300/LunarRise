@@ -4,6 +4,7 @@ import main.components.SpriteRenderer;
 import main.engine.GameObject;
 import main.engine.Window;
 
+import main.items.Item;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -126,6 +127,15 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		boolean rebufferData = false;
 		for(int i = 0; i < numSprites; i++) {
 			SpriteRenderer spr = sprites[i];
+			boolean shouldRender;
+			try {
+				shouldRender = spr.gameObject.hasItemAssoc().inScene;
+			}catch(NullPointerException e){
+				continue;
+			}
+			if (shouldRender == false) {
+				continue;
+			}
 			if(spr.isDirty()) {
 				if(!hasTexture(spr.getTexture())) {
 					this.renderer.destroyGameObject(spr.gameObject);
@@ -189,7 +199,6 @@ public class RenderBatch implements Comparable<RenderBatch>{
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	

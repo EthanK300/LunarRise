@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import imgui.ImGui;
 import main.components.Component;
 import main.components.SpriteRenderer;
+import main.items.Item;
 import main.util.AssetPool;
 
 public class GameObject {
@@ -111,6 +112,15 @@ public class GameObject {
 		}
 		
 		return obj;
+	}
+	public Item hasItemAssoc(){
+		for(int i = 0; i < components.size(); i++){
+			Component c = components.get(i);
+			if(c instanceof Item){
+				return (Item)components.get(i);
+			}
+		}
+		return null;
 	}
 	
 	public static void init(int maxId) {
