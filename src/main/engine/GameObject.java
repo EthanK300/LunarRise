@@ -10,6 +10,7 @@ import imgui.ImGui;
 import main.components.Component;
 import main.components.SpriteRenderer;
 import main.items.Item;
+import main.player.PlayerController;
 import main.util.AssetPool;
 
 public class GameObject {
@@ -90,6 +91,15 @@ public class GameObject {
 		for(int i=0; i < components.size(); i++) {
 			components.get(i).destroy();
 		}
+	}
+	public PlayerController getPlayerController(){
+		for(Component c : components){
+			if(c instanceof PlayerController){
+				return (PlayerController)c;
+			}
+		}
+		assert false: "attempted to get player object with no controller";
+		return null;
 	}
 	
 	public GameObject copy() {

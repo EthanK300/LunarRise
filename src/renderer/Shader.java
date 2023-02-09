@@ -95,12 +95,11 @@ public class Shader {
 		
 			//check for linking and attaching errors
 			success = GL20.glGetProgrami(shaderProgramID,  GL20.GL_LINK_STATUS);
-
-			System.out.println(GL20.glGetProgramInfoLog(shaderProgramID));
+			GL20.glGetShaderInfoLog(shaderProgramID);
 			if(success == GL20.GL_FALSE) {
 				int len = GL20.glGetProgrami(shaderProgramID, GL20.GL_INFO_LOG_LENGTH);
 				System.err.println("ERROR: '"+filepath+"'\n\tLinking shaders failed");
-				System.out.println(GL20.glGetProgramInfoLog(fragmentID, len));
+				//System.out.println(GL20.glGetProgramInfoLog(fragmentID, len));
 				assert false : "";
 			}
 			

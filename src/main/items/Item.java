@@ -12,18 +12,22 @@ import renderer.DebugDraw;
 
 //michael.mackrory@nike.com
 public abstract class Item extends Component {
-    private static final GameObject player = Window.getScene().getGameObjectWith(PlayerController.class);
+    public static GameObject player;
     public Vector2f pos;
     public String name;
     public static final Vector2f range = settings.acquireItemRange;
     public Vector2f dimensions;
     public boolean inScene;
     public Vector3f BoxColor;
+    public float debounce;
+    public static PlayerController PC;
 
     public abstract void selfUpdate(float dt);
     public abstract void selfStart();
     @Override
     public void update(float dt){
+        player = Window.getScene().getGameObjectWith(PlayerController.class);
+        PC = player.getPlayerController();
         selfUpdate(dt);
     }
     @Override

@@ -1,5 +1,5 @@
 #type vertex
-#version 330 core
+#version 460
 layout (location=0) in vec3 aPos;
 layout (location=1) in vec4 aColor;
 layout (location=2) in vec2 aTexCoords;
@@ -25,7 +25,7 @@ void main()
 }
 
 #type fragment
-#version 330 core
+#version 460
 
 in vec4 fColor;
 in vec2 fTexCoords;
@@ -49,3 +49,30 @@ void main()
     }
     color = vec3(fEntityId, fEntityId, fEntityId);
 }
+/**
+#version 400 core
+#extension GL_EXT_nonuniform_qualifier : require
+
+in vec4 fColor;
+in vec2 fTexCoords;
+in float fTexId;
+in float fEntityId;
+
+uniform sampler2D uTextures[8];
+
+out vec3 color;
+
+void main()
+{
+    vec4 texColor = vec4(1, 1, 1, 1);
+    if (fTexId > 0) {
+        int id = int(fTexId);
+        texColor = fColor * texture(uTextures[nonuniformEXT(id)], fTexCoords);
+    }
+
+    if (texColor.a < 0.5) {
+        discard;
+    }
+    color = vec3(fEntityId, fEntityId, fEntityId);
+
+**/

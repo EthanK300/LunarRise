@@ -173,6 +173,10 @@ public class PlayerController extends Component {
 		}else {
 			//stateMachine.trigger("stopJumping");//TODO:create animation
 		}
+		//TODO:tester inventory check
+		if(inventory.size() > 0){
+			System.out.println(inventory);
+		}
 	}
 
 	public void checkOnGround() {
@@ -229,7 +233,7 @@ public class PlayerController extends Component {
 		}
 	}
 	public boolean addItemInv(Item item){
-		if(inventory.size() >= MAX_SIZE){
+		if(inventory.size() > MAX_SIZE){
 			inventory.add(item);
 			item.inScene = false;
 			return true;

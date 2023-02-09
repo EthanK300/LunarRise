@@ -3,6 +3,7 @@ package scenes;
 import java.io.File;
 import java.util.Collection;
 
+import main.items.testItem;
 import org.joml.Vector2f;
 
 import imgui.ImGui;
@@ -219,6 +220,9 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 			//Interaction inty = new Interaction(new Vector2f(1,1), new Vector2f(1,1), GLFW_KEY_C, 0, new Vector3f(0.0f, 0.0f, 1.0f));
 			//object.addComponent(inty);
 			//manager.add(inty);
+		}
+		if(Index == 13){
+			object.addComponent(new testItem("testitem1", new Vector2f(1, 1), new Vector3f(1.0f, 0.0f, 0.0f), true));
 		}
 
 		levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);

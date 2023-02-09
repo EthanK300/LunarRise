@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="fix commit structure 1">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="refactor item system into abstract">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/debugLine2d.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/debugLine2d.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/pickingShader.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/pickingShader.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/engine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/GameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/items/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/items/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/items/testItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/items/testItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/player/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/PlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Shader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +138,11 @@
       <workItem from="1674860684648" duration="5907000" />
       <workItem from="1675029393957" duration="2771000" />
       <workItem from="1675054730094" duration="2126000" />
+      <workItem from="1675819695943" duration="38000" />
+      <workItem from="1675820242312" duration="4174000" />
+      <workItem from="1675897844721" duration="1628000" />
+      <workItem from="1675904124126" duration="29000" />
+      <workItem from="1675904419944" duration="2560000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>
@@ -222,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675285135865</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="refactor item system into abstract">
+      <created>1675835535246</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1675835535246</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +264,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -261,6 +293,7 @@
     <MESSAGE value="started interaction refactor" />
     <MESSAGE value="refined" />
     <MESSAGE value="fix commit structure 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix commit structure 1" />
+    <MESSAGE value="refactor item system into abstract" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor item system into abstract" />
   </component>
 </project>
