@@ -124,11 +124,22 @@ public class GameObject {
 		return obj;
 	}
 	public Item hasItemAssoc(){
+		Class[] classes = Item.class.getClasses();
 		for(int i = 0; i < components.size(); i++){
 			Component c = components.get(i);
+
+
+			for(Class cl : classes){
+				if(c.getClass().getCanonicalName().equals(cl.getCanonicalName())){
+					return (Item)c;
+				}
+			}
+
+			/**
 			if(c instanceof Item){
 				return (Item)components.get(i);
 			}
+			 **/
 		}
 		return null;
 	}
