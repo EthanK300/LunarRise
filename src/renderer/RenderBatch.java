@@ -49,6 +49,8 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private int vaoID, vboID;
 	private int maxBatchSize;
 	private int zIndex;
+	private static Texture backDropScreen;
+	private static int vao2ID;
 	
 	private Renderer renderer;
 	
@@ -71,6 +73,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	public void start() {
 		//Generate and bind vertex array object
 		vaoID = glGenVertexArrays();
+		vao2ID = vaoID;
 		glBindVertexArray(vaoID);
 		
 		//allocate necessary space for vertices
@@ -184,6 +187,31 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		}
 		shader.detach();
 		
+	}
+	public static void renderBackDrop(){
+		Shader shader = Renderer.getBoundShader();
+		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
+		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
+
+		backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
+		glActiveTexture(GL_TEXTURE0);
+		backDropScreen.bind();
+
+		shader.uploadInt("uTextures", 0);
+
+		glBindVertexArray(vao2ID);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT,0);
+
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glBindVertexArray(0);
+
+		backDropScreen.unBind();
+		shader.detach();
+
 	}
 	
 	public boolean destroyIfExists(GameObject go) {

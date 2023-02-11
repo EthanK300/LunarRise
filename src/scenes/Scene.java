@@ -146,6 +146,9 @@ public class Scene {
 	public void render() {
 		this.renderer.render();
 	}
+	public void renderBackDrop(){
+		this.renderer.renderBackDrop();
+	}
 
 	public Camera camera() {
 		return this.camera;

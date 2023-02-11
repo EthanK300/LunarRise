@@ -50,6 +50,7 @@ public class LevelSceneInitializer extends SceneInitializer{
 		AssetPool.addSpriteSheet("assets/images/gizmos.png", new Spritesheet(AssetPool.getTexture("assets/images/gizmos.png"), 24, 48, 3, 0));
 		
 		AssetPool.getTexture("assets/images/blendImage2.png");
+		AssetPool.getTexture("assets/images/backDrop.png");
 
 		//TODO:add all sounds, this one doesn't work yet
 		//AssetPool.addSound("assets/sounds/test.ogg", false);

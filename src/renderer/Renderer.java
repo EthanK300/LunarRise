@@ -72,5 +72,12 @@ public class Renderer {
 			batch.render();
 		}
 	}
+
+	public void renderBackDrop(){
+		currentShader.use();
+		//render image to backdrop
+		RenderBatch.renderBackDrop();
+
+	}
 	
 }

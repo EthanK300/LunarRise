@@ -58,7 +58,7 @@ public class Texture {
 		STBImage.stbi_set_flip_vertically_on_load(true);
 		ByteBuffer image = STBImage.stbi_load(filepath, width, height, channels, 0);
 		//GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 0); //test unpack alignment of the data
-		//make sure the image loads ccorrectly if its jpg or png, if its jpg then formatting is differrent from png
+		//make sure the image loads correctly if its jpg or png, if its jpg then formatting is different from png
 		if(image != null) {
 			this.width = width.get(0);
 			this.height = height.get(0);

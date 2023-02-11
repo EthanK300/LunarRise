@@ -192,11 +192,14 @@ public class Window implements Observer{
 		
 		Shader defaultShader = AssetPool.getShader("assets/shaders/default.glsl");
 		Shader pickingShader = AssetPool.getShader("assets/shaders/pickingShader.glsl");
-		
+		Shader backDropShader = AssetPool.getShader("assets/shaders/backDrop.glsl");
+
 		while(!glfwWindowShouldClose(glfwWindow)) {
 			//poll events(get keyboard inputs, mouse inputs, etc)
 			glfwPollEvents();
-			
+
+
+
 			//render to picking texture
 			
 			glDisable(GL_BLEND);
@@ -206,11 +209,17 @@ public class Window implements Observer{
 			Vector4f clearColor = currentScene.camera().clearColor;
 			glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			
+
+			//render to backdrop
+			if(true){
+				Renderer.bindShader(backDropShader);
+				currentScene.renderBackDrop();
+			}
+
 			Renderer.bindShader(pickingShader);
 			currentScene.render();
 			
-			
+
 			
 			pickingTexture.disableWriting();
 			glEnable(GL_BLEND);
@@ -223,7 +232,6 @@ public class Window implements Observer{
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			if(dt >= 0) {
-				
 				
 				Renderer.bindShader(defaultShader);
 				if(runtimeActive) {
