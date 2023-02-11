@@ -26,15 +26,19 @@ public class testItem extends Item{
         pos = this.gameObject.transform.position;
         float diffX = Math.abs(pos.x - player.transform.position.x);
         float diffY = Math.abs(pos.y - player.transform.position.y);
-
+        if(!inScene){
+            this.gameObject.transform.position = new Vector2f((float)Double.POSITIVE_INFINITY, (float)Double.POSITIVE_INFINITY);
+            return;
+        }
         //check if player in range
-        if ((diffX < this.range.x) && (diffY < this.range.y)) {
+        if ((diffX < this.range.x) && (diffY < this.range.y) && inScene) {
             DebugDraw.addBox2D(pos, new Vector2f(dimensions.x / 4, dimensions.y / 4), 0.0f, BoxColor);
             //display lines if in range, execute interaction if key pressed
             if (keyListener.isKeyPressed(GLFW_KEY_F) && debounce <= 0) {
                 debounce = 1.0f;
                 if(PC.addItemInv(this)){
                     //success!
+                    this.gameObject.transform.position = new Vector2f((float)Double.POSITIVE_INFINITY, (float)Double.POSITIVE_INFINITY);
                     System.out.println("added item");
                 }
                 System.out.println("pressed f");
@@ -45,7 +49,9 @@ public class testItem extends Item{
 
     @Override
     public void selfStart() {
-        //start
+        if(!inScene){
+            this.gameObject.transform.position = new Vector2f((float)Double.POSITIVE_INFINITY, (float)Double.POSITIVE_INFINITY);
+        }
 
     }
 }
