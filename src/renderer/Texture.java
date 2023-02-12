@@ -63,13 +63,16 @@ public class Texture {
 			this.width = width.get(0);
 			this.height = height.get(0);
 			if(channels.get(0) == 3) {
+				//rgb
 				GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, width.get(0), height.get(0), 
 					0, GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, image);
 			}else if(channels.get(0) == 4){
+				//rgba
 				GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, width.get(0), height.get(0), 
 						0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, image);
 			}else {
-				assert false : "Error: (Texture) Unknown number of channesl '" + channels.get(0) + "'";
+				assert false : "Error: (Texture) Unknown number of channels '" + channels.get(0) + "'";
+				System.out.println("error!");
 			}
 		}else {
 			assert false: "error could not load image " + filepath;

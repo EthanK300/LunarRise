@@ -26,31 +26,45 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	//POS				Color						tex coords			tex id
 	//float,float		float,float,float,float		float , float		float
 	private final int POS_SIZE = 2;
+	private static int POS_SIZE_STATIC = 2;
 	private final int COLOR_SIZE = 4;
+	private static int COLOR_SIZE_STATIC = 4;
 	private final int TEX_COORDS_SIZE = 2;
+	private static int TEX_COORDS_SIZE_STATIC = 2;
 	private final int TEX_ID_SIZE = 1;
+	private static int TEX_ID_SIZE_STATIC = 1;
 	private final int ENTITY_ID_SIZE = 1;
+	private static int ENTITY_ID_SIZE_STATIC = 1;
 	
 	private final int POS_OFFSET = 0;
+	private static final int POS_OFFSET_STATIC = 0;
 	private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
+	private static final int COLOR_OFFSET_STATIC = POS_OFFSET_STATIC + POS_SIZE_STATIC * Float.BYTES;
 	private final int TEX_COORDS_OFFSET = COLOR_OFFSET + COLOR_SIZE * Float.BYTES;
+	private final static int TEX_COORDS_OFFSET_STATIC = COLOR_OFFSET_STATIC + COLOR_SIZE_STATIC * Float.BYTES;
 	private final int TEX_ID_OFFSET = TEX_COORDS_OFFSET + TEX_COORDS_SIZE * Float.BYTES;
+	private final static int TEX_ID_OFFSET_STATIC = TEX_COORDS_OFFSET_STATIC + TEX_COORDS_SIZE_STATIC * Float.BYTES;
 	private final int ENTITY_ID_OFFSET = TEX_ID_OFFSET + TEX_ID_SIZE * Float.BYTES;
+	private final static int ENTITY_ID_OFFSET_STATIC = TEX_ID_OFFSET_STATIC + TEX_ID_SIZE_STATIC * Float.BYTES;
 	private final int VERTEX_SIZE = 10;
+	private static final int VERTEX_SIZE_STATIC = 10;
 	private final int VERTEX_SIZE_BYTES = VERTEX_SIZE * Float.BYTES;
+	private static final int VERTEX_SIZE_BYTES_STATIC = VERTEX_SIZE_STATIC * Float.BYTES;
 	
 	private SpriteRenderer[] sprites;
 	private int numSprites;
 	private boolean hasRoom;
 	private float[] vertices;
+	private static float[] vertices2;
 	private int[] texSlots = {0,1,2,3,4,5,6,7};
 	
 	private List<Texture> textures;
 	private int vaoID, vboID;
 	private int maxBatchSize;
+	private static int maxBatchSizeStatic = 1000;
 	private int zIndex;
 	private static Texture backDropScreen;
-	private static int vao2ID;
+	private static int vao2ID, vbo2ID;
 	
 	private Renderer renderer;
 	
@@ -63,7 +77,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		//4 vertices "quads"
 		
 		vertices = new float[maxBatchSize * 4 * VERTEX_SIZE];
-		
+		vertices2 = vertices;
 		this.numSprites = 0;
 		this.hasRoom = true;
 		this.textures = new ArrayList<>();
@@ -73,11 +87,12 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	public void start() {
 		//Generate and bind vertex array object
 		vaoID = glGenVertexArrays();
-		vao2ID = vaoID;
+
 		glBindVertexArray(vaoID);
 		
 		//allocate necessary space for vertices
 		vboID = glGenBuffers();
+
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);
 		glBufferData(GL_ARRAY_BUFFER, vertices.length * Float.BYTES, GL_DYNAMIC_DRAW);
 		
@@ -189,6 +204,39 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		
 	}
 	public static void renderBackDrop(){
+
+		vao2ID = glGenVertexArrays();
+		glBindVertexArray(vao2ID);
+
+		vbo2ID = glGenBuffers();
+
+		glBindBuffer(GL_ARRAY_BUFFER, vbo2ID);
+		glBufferData(GL_ARRAY_BUFFER, vertices2.length * Float.BYTES, GL_STATIC_DRAW);
+
+		int eboID2 = glGenBuffers();
+		int[] indices2 = generateIndicesStatic();
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboID2);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices2, GL_STATIC_DRAW);
+
+		//enable buffer attribute pointers
+		glVertexAttribPointer(0, POS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, POS_OFFSET_STATIC);
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, COLOR_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, COLOR_OFFSET_STATIC);
+		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(2, TEX_COORDS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_COORDS_OFFSET_STATIC);
+		glEnableVertexAttribArray(2);
+
+		glVertexAttribPointer(3, TEX_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_ID_OFFSET_STATIC);
+		glEnableVertexAttribArray(3);
+
+		glVertexAttribPointer(4, ENTITY_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, ENTITY_ID_OFFSET_STATIC);
+		glEnableVertexAttribArray(4);
+
+		glBufferSubData(GL_ARRAY_BUFFER, 0, vertices2);
+
 		Shader shader = Renderer.getBoundShader();
 		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
 		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
@@ -211,7 +259,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 
 		backDropScreen.unBind();
 		shader.detach();
-
+		//System.out.println(glGetError());
 	}
 	
 	public boolean destroyIfExists(GameObject go) {
@@ -312,6 +360,15 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		}
 		return elements;
 	}
+
+	private static int[] generateIndicesStatic() {
+		// 6 indices per quad
+		int[] elementsS = new int[6 * maxBatchSizeStatic];
+		for(int i = 0; i < maxBatchSizeStatic; i++) {
+			loadElementIndicesStatic(elementsS, i);
+		}
+		return elementsS;
+	}
 	
 	private void loadElementIndices(int[] elements, int index) {
 		int offsetArrayIndex = 6 * index;
@@ -328,6 +385,22 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		elements[offsetArrayIndex + 4] = offset + 2;
 		elements[offsetArrayIndex + 5] = offset + 1;
 		
+	}
+	private static void loadElementIndicesStatic(int[] elements, int index) {
+		int offsetArrayIndex = 6 * index;
+		int offset = 4 * index;
+
+		//3,2,0,0,2,1		7,6,4,4,6,5
+		//triangle 1
+		elements[offsetArrayIndex] = offset + 3;
+		elements[offsetArrayIndex + 1] = offset + 2;
+		elements[offsetArrayIndex + 2] = offset + 0;
+
+		//triangle 2
+		elements[offsetArrayIndex + 3] = offset + 0;
+		elements[offsetArrayIndex + 4] = offset + 2;
+		elements[offsetArrayIndex + 5] = offset + 1;
+
 	}
 	
 	public boolean hasRoom() {

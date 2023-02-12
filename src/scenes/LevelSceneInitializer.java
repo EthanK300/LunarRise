@@ -51,6 +51,7 @@ public class LevelSceneInitializer extends SceneInitializer{
 		
 		AssetPool.getTexture("assets/images/blendImage2.png");
 		AssetPool.getTexture("assets/images/backDrop.png");
+		AssetPool.getTexture("assets/images/backDrop2.png");
 
 		//TODO:add all sounds, this one doesn't work yet
 		//AssetPool.addSound("assets/sounds/test.ogg", false);
