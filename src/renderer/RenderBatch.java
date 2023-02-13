@@ -166,15 +166,6 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		boolean rebufferData = false;
 		for(int i = 0; i < numSprites; i++) {
 			SpriteRenderer spr = sprites[i];
-			boolean shouldRender;
-			try {
-				shouldRender = spr.gameObject.hasItemAssoc().inScene;
-			}catch(NullPointerException e){
-				continue;
-			}
-			if (shouldRender == false) {
-				continue;
-			}
 			if(spr.isDirty()) {
 				if(!hasTexture(spr.getTexture())) {
 					this.renderer.destroyGameObject(spr.gameObject);
@@ -393,15 +384,6 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		}
 		return elements;
 	}
-
-	private static int[] generateIndicesStatic() {
-		// 6 indices per quad
-		int[] elementsS = new int[6 * maxBatchSizeStatic];
-		for(int i = 0; i < maxBatchSizeStatic; i++) {
-			loadElementIndicesStatic(elementsS, i);
-		}
-		return elementsS;
-	}
 	
 	private void loadElementIndices(int[] elements, int index) {
 		int offsetArrayIndex = 6 * index;
@@ -418,22 +400,6 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		elements[offsetArrayIndex + 4] = offset + 2;
 		elements[offsetArrayIndex + 5] = offset + 1;
 		
-	}
-	private static void loadElementIndicesStatic(int[] elements, int index) {
-		int offsetArrayIndex = 6 * index;
-		int offset = 4 * index;
-
-		//3,2,0,0,2,1		7,6,4,4,6,5
-		//triangle 1
-		elements[offsetArrayIndex] = offset + 3;
-		elements[offsetArrayIndex + 1] = offset + 2;
-		elements[offsetArrayIndex + 2] = offset + 0;
-
-		//triangle 2
-		elements[offsetArrayIndex + 3] = offset + 0;
-		elements[offsetArrayIndex + 4] = offset + 2;
-		elements[offsetArrayIndex + 5] = offset + 1;
-
 	}
 	
 	public boolean hasRoom() {

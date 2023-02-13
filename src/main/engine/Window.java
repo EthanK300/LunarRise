@@ -211,10 +211,12 @@ public class Window implements Observer{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//render to backdrop
+			/**
 			if(true){
 				Renderer.bindShader(backDropShader);
 				currentScene.renderBackDrop();
 			}
+			 **/
 
 			Renderer.bindShader(pickingShader);
 			currentScene.render();
