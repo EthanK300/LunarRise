@@ -106,6 +106,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	}	
 	
 	public void start() {
+		backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
 		//Generate and bind vertex array object
 		vaoID = glGenVertexArrays();
 
@@ -139,29 +140,6 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		glVertexAttribPointer(4, ENTITY_ID_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, ENTITY_ID_OFFSET);
 		glEnableVertexAttribArray(4);
 	}
-	
-	public void addSprite(SpriteRenderer spr) {
-		//get index and add sprite object(sprite renderer)
-		int index = this.numSprites;
-		// [0,1,2,3,4,5]
-		this.sprites[index] = spr;
-		this.numSprites++;
-		
-		if(spr.getTexture() != null) {
-			if(!textures.contains(spr.getTexture())) {
-				textures.add(spr.getTexture());
-			}
-		}
-		
-		//add properties to local vertices array
-		loadVertexProperties(index);
-		
-		if(numSprites >= this.maxBatchSize) {
-			this.hasRoom = false;
-		}
-		
-	}
-	
 	public void render() {
 		boolean rebufferData = false;
 		for(int i = 0; i < numSprites; i++) {
@@ -192,7 +170,22 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		Shader shader = Renderer.getBoundShader();
 		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
 		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
-		
+
+		glActiveTexture(GL_TEXTURE0 + 1);
+		backDropScreen.bind();
+		shader.uploadTexture("uTextures", 0);
+		glBindVertexArray(vaoID);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glBindVertexArray(0);
+		backDropScreen.unBind();
+		System.err.println(glGetError());
+
 		for(int i = 0; i < textures.size(); i++) {
 			glActiveTexture(GL_TEXTURE0 + i + 1);
 			textures.get(i).bind();
@@ -284,6 +277,27 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		glBindVertexArray(0);
 
 		shader.detach();
+	}
+	public void addSprite(SpriteRenderer spr) {
+		//get index and add sprite object(sprite renderer)
+		int index = this.numSprites;
+		// [0,1,2,3,4,5]
+		this.sprites[index] = spr;
+		this.numSprites++;
+
+		if(spr.getTexture() != null) {
+			if(!textures.contains(spr.getTexture())) {
+				textures.add(spr.getTexture());
+			}
+		}
+
+		//add properties to local vertices array
+		loadVertexProperties(index);
+
+		if(numSprites >= this.maxBatchSize) {
+			this.hasRoom = false;
+		}
+
 	}
 	
 	public boolean destroyIfExists(GameObject go) {
