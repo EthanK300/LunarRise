@@ -5,11 +5,15 @@ import main.engine.GameObject;
 import main.engine.Window;
 
 import main.items.Item;
+import main.util.Time;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 import main.util.AssetPool;
+import org.lwjgl.BufferUtils;
 
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,9 +68,26 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private static int maxBatchSizeStatic = 1000;
 	private int zIndex;
 	private static Texture backDropScreen;
-	private static int vao2ID, vbo2ID;
+	private static int vaoID2, vboID2, eboID2;
 	
 	private Renderer renderer;
+
+	private static float[] vertexArray = {
+			// position               // color                  // UV Coordinates
+			100f,   0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,     1, 1, // Bottom right 0
+			0f, 100f, 0.0f,       0.0f, 1.0f, 0.0f, 1.0f,     0, 0, // Top left     1
+			100f, 100f, 0.0f ,      1.0f, 0.0f, 1.0f, 1.0f,     1, 0, // Top right    2
+			0f,   0f, 0.0f,       1.0f, 1.0f, 0.0f, 1.0f,     0, 1  // Bottom left  3
+	};
+
+	private static int[] elementArray = {
+			/*
+                    x        x
+                    x        x
+             */
+			2, 1, 0, // Top right triangle
+			0, 1, 3 // bottom left triangle
+	};
 	
 	public RenderBatch(int maxBatchSize, int zIndex, Renderer renderer) {
 		this.zIndex = zIndex;
@@ -204,62 +225,74 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		
 	}
 	public static void renderBackDrop(){
+		Shader shader = AssetPool.getShader("assets/shaders/backDrop.glsl");
+		backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
 
-		vao2ID = glGenVertexArrays();
-		glBindVertexArray(vao2ID);
+		// ============================================================
+		// Generate VAO, VBO, and EBO buffer objects, and send to GPU
+		// ============================================================
+		vaoID2 = glGenVertexArrays();
+		glBindVertexArray(vaoID2);
 
-		vbo2ID = glGenBuffers();
+		// Create a float buffer of vertices
+		FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertexArray.length);
+		vertexBuffer.put(vertexArray).flip();
 
-		glBindBuffer(GL_ARRAY_BUFFER, vbo2ID);
-		glBufferData(GL_ARRAY_BUFFER, vertices2.length * Float.BYTES, GL_STATIC_DRAW);
+		// Create VBO upload the vertex buffer
+		vboID2 = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, vboID2);
+		glBufferData(GL_ARRAY_BUFFER, vertexBuffer, GL_STATIC_DRAW);
 
-		int eboID2 = glGenBuffers();
-		int[] indices2 = generateIndicesStatic();
+		// Create the indices and upload
+		IntBuffer elementBuffer = BufferUtils.createIntBuffer(elementArray.length);
+		elementBuffer.put(elementArray).flip();
 
+		eboID2 = glGenBuffers();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboID2);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices2, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementBuffer, GL_STATIC_DRAW);
 
-		//enable buffer attribute pointers
-		glVertexAttribPointer(0, POS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, POS_OFFSET_STATIC);
+		// Add the vertex attribute pointers
+		int positionsSize = 3;
+		int colorSize = 4;
+		int uvSize = 2;
+		int vertexSizeBytes = (positionsSize + colorSize + uvSize) * Float.BYTES;
+		glVertexAttribPointer(0, positionsSize, GL_FLOAT, false, vertexSizeBytes, 0);
 		glEnableVertexAttribArray(0);
 
-		glVertexAttribPointer(1, COLOR_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, COLOR_OFFSET_STATIC);
+		glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionsSize * Float.BYTES);
 		glEnableVertexAttribArray(1);
 
-		glVertexAttribPointer(2, TEX_COORDS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_COORDS_OFFSET_STATIC);
+		glVertexAttribPointer(2, uvSize, GL_FLOAT, false, vertexSizeBytes, (positionsSize + colorSize) * Float.BYTES);
 		glEnableVertexAttribArray(2);
 
-		glVertexAttribPointer(3, TEX_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_ID_OFFSET_STATIC);
-		glEnableVertexAttribArray(3);
+		//use
 
-		glVertexAttribPointer(4, ENTITY_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, ENTITY_ID_OFFSET_STATIC);
-		glEnableVertexAttribArray(4);
+		shader.use();
 
-		glBufferSubData(GL_ARRAY_BUFFER, 0, vertices2);
-
-		Shader shader = Renderer.getBoundShader();
-		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
-		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
-
-		backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
+		// Upload texture to shader
+		shader.uploadTexture("TEX_SAMPLER", 0);
 		glActiveTexture(GL_TEXTURE0);
 		backDropScreen.bind();
 
-		shader.uploadInt("uTextures", 0);
+		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
+		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
+		shader.uploadFloat("uTime", Time.getTime());
+		// Bind the VAO that we're using
+		glBindVertexArray(vaoID2);
 
-		glBindVertexArray(vao2ID);
+		// Enable the vertex attribute pointers
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT,0);
+		glDrawElements(GL_TRIANGLES, elementArray.length, GL_UNSIGNED_INT, 0);
 
+		// Unbind everything
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
+
 		glBindVertexArray(0);
 
-		backDropScreen.unBind();
 		shader.detach();
-		//System.out.println(glGetError());
 	}
 	
 	public boolean destroyIfExists(GameObject go) {

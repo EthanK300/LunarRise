@@ -57,6 +57,10 @@ public class Texture {
 		IntBuffer channels = BufferUtils.createIntBuffer(1);
 		STBImage.stbi_set_flip_vertically_on_load(true);
 		ByteBuffer image = STBImage.stbi_load(filepath, width, height, channels, 0);
+		//TODO:IMAGE IS NULL AND CAUSING ERROR
+		if(image == null){
+
+		}
 		//GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 0); //test unpack alignment of the data
 		//make sure the image loads correctly if its jpg or png, if its jpg then formatting is different from png
 		if(image != null) {

@@ -15,6 +15,8 @@ import org.joml.Vector3f;
 import physics2d.components.Box2DCollider;
 import physics2d.components.RigidBody2D;
 import physics2d.enums.BodyType;
+import renderer.Texture;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 
@@ -62,7 +64,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		AssetPool.addSpriteSheet("assets/images/gizmos.png", new Spritesheet(AssetPool.getTexture("assets/images/gizmos.png"), 24, 48, 3, 0));
 
 		AssetPool.getTexture("assets/images/blendImage2.png");
-
+		AssetPool.getTexture("assets/images/backDrop.png");
 		//TODO:add all sounds, this one doesn't work yet
 		//AssetPool.addSound("assets/sounds/test.ogg", false);
 
