@@ -67,7 +67,7 @@ public class Window implements Observer{
 	}
 	
 	public static void changeScene(SceneInitializer sceneInitializer) {
-		
+
 		if(currentScene != null) {
 			currentScene.destroy();
 		}
@@ -77,6 +77,7 @@ public class Window implements Observer{
 		currentScene.load();
 		currentScene.init();
 		currentScene.start();
+
 	}
 	
 	public static Window get() {
@@ -177,8 +178,9 @@ public class Window implements Observer{
 		
 		this.imguiLayer = new ImGuiLayer(glfwWindow, pickingTexture);
 		this.imguiLayer.initImGui();
-		
+
 		Window.changeScene(new levelEditorSceneInitializer());
+
 	}
 
 	public void loop() {
@@ -213,6 +215,7 @@ public class Window implements Observer{
 				currentScene.renderBackDrop();
 			}
 			 **/
+
 			Renderer.bindShader(backDropShader);
 			RenderBatch.renderBackDrop();
 

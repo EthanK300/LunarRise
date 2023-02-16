@@ -56,7 +56,7 @@ public class Shader {
 		}
 		
 		public void compile() {
-			
+			//TODO:this is where an error originates - error 1282
 			int vertexID, fragmentID;
 			//compile and link shaders
 			//first thing: load and compile the vertex shader
@@ -100,9 +100,8 @@ public class Shader {
 				int len = GL20.glGetProgrami(shaderProgramID, GL20.GL_INFO_LOG_LENGTH);
 				System.err.println("ERROR: '"+filepath+"'\n\tLinking shaders failed");
 				//System.out.println(GL20.glGetProgramInfoLog(fragmentID, len));
-				assert false : "";
+				assert false : "ERROR: '"+filepath+"'\n\tLinking shaders failed";
 			}
-			
 		}
 		
 		public void use() {

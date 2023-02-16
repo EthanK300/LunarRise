@@ -73,10 +73,10 @@ public class RenderBatch implements Comparable<RenderBatch>{
 
 	private static float[] vertexArray = {
 			// position               // color                  // UV Coordinates
-			100f,   0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,     1, 1, // Bottom right 0
-			0f, 100f, 0.0f,       0.0f, 1.0f, 0.0f, 1.0f,     0, 0, // Top left     1
-			100f, 100f, 0.0f ,      1.0f, 0.0f, 1.0f, 1.0f,     1, 0, // Top right    2
-			0f,   0f, 0.0f,       1.0f, 1.0f, 0.0f, 1.0f,     0, 1  // Bottom left  3
+			1f,   0f, 0.0f,       //1.0f, 0.0f, 0.0f, 1.0f,     1, 1, // Bottom right 0
+			0f, 1, 0.0f,       //0.0f, 1.0f, 0.0f, 1.0f,     0, 0, // Top left     1
+			1f, 1f, 0.0f ,      //1.0f, 0.0f, 1.0f, 1.0f,     1, 0, // Top right    2
+			0f,   0f, 0.0f,       //1.0f, 1.0f, 0.0f, 1.0f,     0, 1  // Bottom left  3
 	};
 
 	private static int[] elementArray = {
@@ -192,7 +192,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		shader.detach();
 		
 	}
-	public static void renderBackDrop(){
+	public static void backInit(){
 		backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
 		//Generate and bind vertex array object
 		backVAO = glGenVertexArrays();
@@ -225,6 +225,14 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		glVertexAttribPointer(4, ENTITY_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, ENTITY_ID_OFFSET_STATIC);
 		glEnableVertexAttribArray(4);
 
+	}
+	static boolean init = false;
+	public static void renderBackDrop(){
+
+		if(!init){
+			backInit();
+			init = true;
+		}
 		//updater
 
 		Shader shader = Renderer.getBoundShader();

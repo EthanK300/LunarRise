@@ -11,6 +11,8 @@ import java.util.Map;
 import main.components.Spritesheet;
 import main.engine.Sound;
 
+import static org.lwjgl.opengl.GL11.glGetError;
+
 public class AssetPool {
 	
 	private static Map<String, Shader> shaders = new HashMap<>();

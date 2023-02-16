@@ -19,6 +19,8 @@ import main.components.Component;
 import physics2d.Physics2D;
 import renderer.Renderer;
 
+import static org.lwjgl.opengl.GL11.glGetError;
+
 public class Scene {
 
 	private Renderer renderer;
