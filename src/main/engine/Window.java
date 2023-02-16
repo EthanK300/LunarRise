@@ -1,6 +1,7 @@
 package main.engine;
 
 
+import renderer.*;
 import scenes.LevelSceneInitializer;
 import scenes.Scene;
 import scenes.SceneInitializer;
@@ -31,11 +32,6 @@ import observers.EventSystem;
 import observers.Observer;
 import observers.events.Event;
 import physics2d.Physics2D;
-import renderer.DebugDraw;
-import renderer.Framebuffer;
-import renderer.PickingTexture;
-import renderer.Renderer;
-import renderer.Shader;
 
 
 public class Window implements Observer{
@@ -217,7 +213,10 @@ public class Window implements Observer{
 				currentScene.renderBackDrop();
 			}
 			 **/
+			Renderer.bindShader(backDropShader);
+			RenderBatch.renderBackDrop();
 
+			//render main
 			Renderer.bindShader(pickingShader);
 			currentScene.render();
 			
