@@ -206,8 +206,10 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		//create and upload indices buffer
 		int backEBO = glGenBuffers();
 		int[] backIndices = {3, 2, 0, 0, 2, 1};
+		IntBuffer iBuffer = BufferUtils.createIntBuffer(backIndices.length);
+		iBuffer.put(backIndices);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, backEBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, backIndices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, iBuffer, GL_STATIC_DRAW);
 
 		//enable buffer attribute pointers
 		glVertexAttribPointer(0, POS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, POS_OFFSET_STATIC);

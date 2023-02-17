@@ -40,7 +40,7 @@ public class Window implements Observer{
 	private String title;
 	private long glfwWindow;
 	private static Window window = null;
-	
+	private int cycle = 0;
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public Vector2f screenSizePixels;
 	private long audioContext;
@@ -256,6 +256,13 @@ public class Window implements Observer{
 			endTime = (float)glfwGetTime();
 			dt = endTime - beginTime;
 			beginTime = endTime;
+
+			//error handling
+			cycle++;
+			int err = glGetError();
+			if(err != 0){
+				System.out.println(err + "," + cycle);
+			}
 		}
 		
 	}
