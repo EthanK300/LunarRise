@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="refactor item system into abstract">
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="Added libs dir">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/debugLine2d.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/debugLine2d.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/pickingShader.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/pickingShader.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/engine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/items/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/items/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/items/testItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/items/testItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/player/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Shader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/levelEditorSceneInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LunarRise.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LunarRise.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,24 +58,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/awalk_/IntelliJ/LunarRise&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/awalk_/IdeaProjects/LunarRise/assets/other/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "terminal",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\awalk_\IntelliJ\Xclipse\src\observers" />
@@ -143,6 +134,8 @@
       <workItem from="1675897844721" duration="1628000" />
       <workItem from="1675904124126" duration="29000" />
       <workItem from="1675904419944" duration="2560000" />
+      <workItem from="1677889257447" duration="2000" />
+      <workItem from="1677889324602" duration="435000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>
@@ -242,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675835535246</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added libs dir">
+      <created>1677889704097</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1677889704097</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,6 +294,7 @@
     <MESSAGE value="refined" />
     <MESSAGE value="fix commit structure 1" />
     <MESSAGE value="refactor item system into abstract" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor item system into abstract" />
+    <MESSAGE value="Added libs dir" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added libs dir" />
   </component>
 </project>
