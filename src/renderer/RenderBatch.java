@@ -5,15 +5,11 @@ import main.engine.GameObject;
 import main.engine.Window;
 
 import main.items.Item;
-import main.util.Time;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 import main.util.AssetPool;
-import org.lwjgl.BufferUtils;
 
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +23,10 @@ import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 public class RenderBatch implements Comparable<RenderBatch>{
 	//Vertex
 	//======
-	//POS					Color						tex coords			tex id
-	//float,float,float		float,float,float,float		float , float		float
+	//POS				Color						tex coords			tex id
+	//float,float		float,float,float,float		float , float		float
 	private final int POS_SIZE = 2;
-	private static int POS_SIZE_STATIC = 2;//TODO: shouldn't this be 3? X,Y,Z?
+	private static int POS_SIZE_STATIC = 2;
 	private final int COLOR_SIZE = 4;
 	private static int COLOR_SIZE_STATIC = 4;
 	private final int TEX_COORDS_SIZE = 2;
@@ -39,7 +35,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private static int TEX_ID_SIZE_STATIC = 1;
 	private final int ENTITY_ID_SIZE = 1;
 	private static int ENTITY_ID_SIZE_STATIC = 1;
-	
+
 	private final int POS_OFFSET = 0;
 	private static final int POS_OFFSET_STATIC = 0;
 	private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
@@ -59,33 +55,18 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private int numSprites;
 	private boolean hasRoom;
 	private float[] vertices;
-	private static float[] backVertices = new float[40];
 	private int[] texSlots = {0,1,2,3,4,5,6,7};
-	
 	private List<Texture> textures;
 	private int vaoID, vboID;
 	private int maxBatchSize;
 	private int zIndex;
-	private static Texture backDropScreen;
-	private static int backVAO, backVBO, backEBO;
-	
 	private Renderer renderer;
-
-	private static float[] vertexArray = {
-			// position               // color                  // UV Coordinates
-			1f,   0f, 0.0f,       //1.0f, 0.0f, 0.0f, 1.0f,     1, 1, // Bottom right 0
-			0f, 1, 0.0f,       //0.0f, 1.0f, 0.0f, 1.0f,     0, 0, // Top left     1
-			1f, 1f, 0.0f ,      //1.0f, 0.0f, 1.0f, 1.0f,     1, 0, // Top right    2
-			0f,   0f, 0.0f,       //1.0f, 1.0f, 0.0f, 1.0f,     0, 1  // Bottom left  3
-	};
-
-	private static int[] elementArray = {
-			/*
-                    x        x
-                    x        x
-             */
-			2, 1, 0, // Top right triangle
-			0, 1, 3 // bottom left triangle
+	private static float[] backVertices = {
+			//position		//color				//tex coords	//tex id and entity id
+			3, 1.5f,		1f, 1f, 1f, 1f, 	1, 1,			1,	1,
+			3, 1.25f,		1f, 1f, 1f,	1f,		1, 0,			1,	1,
+			2, 1.25f,		1f, 1f, 1f,	1f, 	0, 0,			1,	1,
+			2, 1.5f,		1f, 1f, 1f,	1f,		0, 1,			1,	1,
 	};
 	
 	public RenderBatch(int maxBatchSize, int zIndex, Renderer renderer) {
@@ -97,6 +78,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		//4 vertices "quads"
 		
 		vertices = new float[maxBatchSize * 4 * VERTEX_SIZE];
+		
 		this.numSprites = 0;
 		this.hasRoom = true;
 		this.textures = new ArrayList<>();
@@ -104,15 +86,12 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	}	
 	
 	public void start() {
-		backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
 		//Generate and bind vertex array object
 		vaoID = glGenVertexArrays();
-
 		glBindVertexArray(vaoID);
 		
 		//allocate necessary space for vertices
 		vboID = glGenBuffers();
-
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);
 		glBufferData(GL_ARRAY_BUFFER, vertices.length * Float.BYTES, GL_DYNAMIC_DRAW);
 		
@@ -138,6 +117,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		glVertexAttribPointer(4, ENTITY_ID_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, ENTITY_ID_OFFSET);
 		glEnableVertexAttribArray(4);
 	}
+	
 	public void render() {
 		boolean rebufferData = false;
 		for(int i = 0; i < numSprites; i++) {
@@ -168,8 +148,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		Shader shader = Renderer.getBoundShader();
 		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
 		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
-		//main update
-
+		
 		for(int i = 0; i < textures.size(); i++) {
 			glActiveTexture(GL_TEXTURE0 + i + 1);
 			textures.get(i).bind();
@@ -192,74 +171,19 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		shader.detach();
 		
 	}
+
 	public static void backInit(){
-		backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
-		//Generate and bind vertex array object
-		backVAO = glGenVertexArrays();
-		glBindVertexArray(backVAO);
-
-		//allocate necessary space for vertices
-		backVBO = glGenBuffers();
-		glBindBuffer(GL_ARRAY_BUFFER, backVBO);
-		glBufferData(GL_ARRAY_BUFFER, backVertices.length * Float.BYTES, GL_STATIC_DRAW);
-
-		//create and upload indices buffer
-		int backEBO = glGenBuffers();
-		int[] backIndices = {3, 2, 0, 0, 2, 1};
-		IntBuffer iBuffer = BufferUtils.createIntBuffer(backIndices.length);
-		iBuffer.put(backIndices);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, backEBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, iBuffer, GL_STATIC_DRAW);
-
-		//enable buffer attribute pointers
-		glVertexAttribPointer(0, POS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, POS_OFFSET_STATIC);
-		glEnableVertexAttribArray(0);
-
-		glVertexAttribPointer(1, COLOR_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, COLOR_OFFSET_STATIC);
-		glEnableVertexAttribArray(1);
-
-		glVertexAttribPointer(2, TEX_COORDS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_COORDS_OFFSET_STATIC);
-		glEnableVertexAttribArray(2);
-
-		glVertexAttribPointer(3, TEX_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_ID_OFFSET_STATIC);
-		glEnableVertexAttribArray(3);
-
-		glVertexAttribPointer(4, ENTITY_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, ENTITY_ID_OFFSET_STATIC);
-		glEnableVertexAttribArray(4);
 
 	}
-	static boolean init = false;
 	public static void renderBackDrop(){
-
+		boolean init = false;
 		if(!init){
 			backInit();
-			init = true;
 		}
-		//updater
 
-		Shader shader = Renderer.getBoundShader();
-		backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
-		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
-		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
-		// ============================================================
-		// Generate VAO, VBO, and EBO buffer objects, and send to GPU
-		// ============================================================
-		glActiveTexture(GL_TEXTURE0 + 1);
-		backDropScreen.bind();
-		shader.uploadTexture("uTextures", 0);
 
-		glBindVertexArray(backVAO);
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glBindVertexArray(0);
-		backDropScreen.unBind();
-		shader.detach();
 	}
+
 	public void addSprite(SpriteRenderer spr) {
 		//get index and add sprite object(sprite renderer)
 		int index = this.numSprites;
@@ -272,8 +196,10 @@ public class RenderBatch implements Comparable<RenderBatch>{
 				textures.add(spr.getTexture());
 			}
 		}
+
 		//add properties to local vertices array
 		loadVertexProperties(index);
+
 		if(numSprites >= this.maxBatchSize) {
 			this.hasRoom = false;
 		}
