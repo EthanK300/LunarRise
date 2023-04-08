@@ -4,8 +4,6 @@ import main.components.SpriteRenderer;
 import main.engine.GameObject;
 import main.engine.Window;
 
-import main.items.Item;
-import main.player.PlayerController;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -36,7 +34,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private static int TEX_ID_SIZE_STATIC = 1;
 	private final int ENTITY_ID_SIZE = 1;
 	private static int ENTITY_ID_SIZE_STATIC = 1;
-	private static GameObject player = Window.getScene().getGameObjectWith(PlayerController.class);
+	private static Vector2f screen = Window.getScene().camera().position;
 	private final int POS_OFFSET = 0;
 	private static final int POS_OFFSET_STATIC = 0;
 	private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
@@ -66,10 +64,10 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private Renderer renderer;
 	private static float[] backVertices = {
 			//position		//color				//tex coords	//tex id and entity id
-			3, 1.5f,		1f, 1f, 1f, 1f, 	1, 1,			1,	1,
-			3, 1.25f,		1f, 1f, 1f,	1f,		1, 0,			1,	1,
-			2, 1.25f,		1f, 1f, 1f,	1f, 	0, 0,			1,	1,
-			2, 1.5f,		1f, 1f, 1f,	1f,		0, 1,			1,	1,
+			3, 1.5f,		1f, 1f, 1f, 1f, 	1, 1,			1,	1,	//up right
+			3, 1.25f,		1f, 1f, 1f,	1f,		1, 0,			1,	1,	//down right
+			2, 1.25f,		1f, 1f, 1f,	1f, 	0, 0,			1,	1,	//down left
+			2, 1.5f,		1f, 1f, 1f,	1f,		0, 1,			1,	1,	//up left
 	};
 	
 	public RenderBatch(int maxBatchSize, int zIndex, Renderer renderer) {
@@ -210,24 +208,40 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	public static void renderBackDrop(){
 
 		boolean init = false;
+
 		double posx = 0;
 		double posy = 0;
 
+		double offsetX = 0;
+		double offsetY = 0;
 
+		double scaleX = 0;
+		double scaleY = 0;
 
 		if(!init) {
 			backInit();
 		}
 
 		try{
-			posx = player.transform.position.x;
-			posy = player.transform.position.y;
+			posx = screen.x;
+			posy = screen.y;
 		}catch(NullPointerException n){
 			assert false: "Error: player not found";
 			System.exit(0);
 		}
 
+		//back drop stitching onto world coords of camera
+		backVertices[0] = (float)(posx + offsetX);
+		backVertices[1] = (float)(posy + offsetY);
 
+		backVertices[10] = (float)(posx + offsetX);
+		backVertices[11] = (float)(posy - offsetY);
+
+		backVertices[20] = (float)(posx - offsetX);
+		backVertices[21] = (float)(posy - offsetY);
+
+		backVertices[30] = (float)(posx - offsetX);
+		backVertices[31] = (float)(posy + offsetY);
 
 		glBindBuffer(GL_ARRAY_BUFFER, backVBO);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, backVertices);
