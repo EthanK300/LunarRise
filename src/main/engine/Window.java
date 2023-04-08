@@ -1,6 +1,7 @@
 package main.engine;
 
 
+import main.components.GameCamera;
 import renderer.*;
 import scenes.LevelSceneInitializer;
 import scenes.Scene;
@@ -317,6 +318,9 @@ public class Window implements Observer{
 	
 	public static Physics2D getPhysics() {
 		return currentScene.getPhysics();
+	}
+	public static GameObject getGameCamera(){
+		return getScene().getGameObjectWith(GameCamera.class);
 	}
 	
 }

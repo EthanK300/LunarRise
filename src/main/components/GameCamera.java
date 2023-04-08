@@ -2,11 +2,13 @@ package main.components;
 
 
 import main.player.PlayerController;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 import main.engine.Camera;
 import main.engine.GameObject;
 import main.engine.Window;
 import main.util.settings;
+import renderer.RenderBatch;
 
 
 public class GameCamera extends Component{
@@ -46,7 +48,6 @@ public class GameCamera extends Component{
 	@Override
 	public void update(float dt) {
 		if(player != null && !player.getComponent(PlayerController.class).hasWon()) {
-			
 			float diffX = player.transform.position.x - gameCamera.position.x;
 			float diffY = player.transform.position.y - gameCamera.position.y;
 			float diffX2 = 0f;
