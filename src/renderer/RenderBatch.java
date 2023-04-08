@@ -5,6 +5,7 @@ import main.engine.GameObject;
 import main.engine.Window;
 
 import main.items.Item;
+import main.player.PlayerController;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -35,7 +36,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private static int TEX_ID_SIZE_STATIC = 1;
 	private final int ENTITY_ID_SIZE = 1;
 	private static int ENTITY_ID_SIZE_STATIC = 1;
-
+	private static GameObject player = Window.getScene().getGameObjectWith(PlayerController.class);
 	private final int POS_OFFSET = 0;
 	private static final int POS_OFFSET_STATIC = 0;
 	private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
@@ -50,14 +51,16 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private static final int VERTEX_SIZE_STATIC = 10;
 	private final int VERTEX_SIZE_BYTES = VERTEX_SIZE * Float.BYTES;
 	private static final int VERTEX_SIZE_BYTES_STATIC = VERTEX_SIZE_STATIC * Float.BYTES;
-	
+	private static Texture backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
 	private SpriteRenderer[] sprites;
 	private int numSprites;
 	private boolean hasRoom;
 	private float[] vertices;
 	private int[] texSlots = {0,1,2,3,4,5,6,7};
+	private static int[] texSlotsStatic = {0,1,2,3,4,5,6,7};
 	private List<Texture> textures;
 	private int vaoID, vboID;
+	private static int backVAO, backVBO, backEBO;
 	private int maxBatchSize;
 	private int zIndex;
 	private Renderer renderer;
@@ -158,13 +161,13 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		glBindVertexArray(vaoID);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
-		
+
 		glDrawElements(GL_TRIANGLES, this.numSprites * 6, GL_UNSIGNED_INT, 0);
-		
+
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glBindVertexArray(0);
-		
+
 		for(int i = 0; i < textures.size(); i++) {
 			textures.get(i).unBind();
 		}
@@ -173,14 +176,83 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	}
 
 	public static void backInit(){
+		//Generate and bind vertex array object
+		backVAO = glGenVertexArrays();
+		glBindVertexArray(backVAO);
 
+		//allocate necessary space for vertices
+		backVBO = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, backVBO);
+		glBufferData(GL_ARRAY_BUFFER, backVertices.length * Float.BYTES, GL_STATIC_DRAW);
+
+		//create and upload indices buffer
+		int backEBO = glGenBuffers();
+		int[] backIndices = {3, 2, 0, 0, 2, 1};
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, backEBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, backIndices, GL_DYNAMIC_DRAW);
+
+		//enable buffer attribute pointers
+		glVertexAttribPointer(0, POS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, POS_OFFSET_STATIC);
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, COLOR_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, COLOR_OFFSET_STATIC);
+		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(2, TEX_COORDS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_COORDS_OFFSET_STATIC);
+		glEnableVertexAttribArray(2);
+
+		glVertexAttribPointer(3, TEX_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_ID_OFFSET_STATIC);
+		glEnableVertexAttribArray(3);
+
+		glVertexAttribPointer(4, ENTITY_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, ENTITY_ID_OFFSET_STATIC);
+		glEnableVertexAttribArray(4);
 	}
 	public static void renderBackDrop(){
+
 		boolean init = false;
-		if(!init){
+		double posx = 0;
+		double posy = 0;
+
+
+
+		if(!init) {
 			backInit();
 		}
 
+		try{
+			posx = player.transform.position.x;
+			posy = player.transform.position.y;
+		}catch(NullPointerException n){
+			assert false: "Error: player not found";
+			System.exit(0);
+		}
+
+
+
+		glBindBuffer(GL_ARRAY_BUFFER, backVBO);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, backVertices);
+
+		Shader shader = Renderer.getBoundShader();
+		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
+		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
+
+		glActiveTexture(GL_TEXTURE1);
+		backDropScreen.bind();
+
+		shader.uploadIntArray("uTextures", texSlotsStatic);
+
+		glBindVertexArray(backVAO);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glBindVertexArray(0);
+
+		backDropScreen.unBind();
+		shader.detach();
 
 	}
 

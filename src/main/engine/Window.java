@@ -216,8 +216,7 @@ public class Window implements Observer{
 			}
 			 **/
 
-			Renderer.bindShader(backDropShader);
-			RenderBatch.renderBackDrop();
+
 
 			//render main
 			Renderer.bindShader(pickingShader);
@@ -236,7 +235,8 @@ public class Window implements Observer{
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			if(dt >= 0) {
-				
+				Renderer.bindShader(defaultShader);
+				RenderBatch.renderBackDrop();
 				Renderer.bindShader(defaultShader);
 				if(runtimeActive) {
 					currentScene.update(dt);
@@ -260,9 +260,7 @@ public class Window implements Observer{
 			//error handling
 			cycle++;
 			int err = glGetError();
-			if(err != 0){
-				System.out.println(err + "," + cycle);
-			}
+			System.out.println(err + "," + cycle);
 		}
 		
 	}
