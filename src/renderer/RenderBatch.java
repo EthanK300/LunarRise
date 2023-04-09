@@ -1,10 +1,10 @@
 package renderer;
 
+import main.components.GameCamera;
 import main.components.SpriteRenderer;
 import main.engine.GameObject;
 import main.engine.Window;
 
-import main.items.Item;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -26,31 +26,51 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	//POS				Color						tex coords			tex id
 	//float,float		float,float,float,float		float , float		float
 	private final int POS_SIZE = 2;
+	private static int POS_SIZE_STATIC = 2;
 	private final int COLOR_SIZE = 4;
+	private static int COLOR_SIZE_STATIC = 4;
 	private final int TEX_COORDS_SIZE = 2;
+	private static int TEX_COORDS_SIZE_STATIC = 2;
 	private final int TEX_ID_SIZE = 1;
+	private static int TEX_ID_SIZE_STATIC = 1;
 	private final int ENTITY_ID_SIZE = 1;
-	
+	private static int ENTITY_ID_SIZE_STATIC = 1;
+	private static Vector2f screen = Window.getScene().camera().position;
 	private final int POS_OFFSET = 0;
+	private static final int POS_OFFSET_STATIC = 0;
 	private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
+	private static final int COLOR_OFFSET_STATIC = POS_OFFSET_STATIC + POS_SIZE_STATIC * Float.BYTES;
 	private final int TEX_COORDS_OFFSET = COLOR_OFFSET + COLOR_SIZE * Float.BYTES;
+	private final static int TEX_COORDS_OFFSET_STATIC = COLOR_OFFSET_STATIC + COLOR_SIZE_STATIC * Float.BYTES;
 	private final int TEX_ID_OFFSET = TEX_COORDS_OFFSET + TEX_COORDS_SIZE * Float.BYTES;
+	private final static int TEX_ID_OFFSET_STATIC = TEX_COORDS_OFFSET_STATIC + TEX_COORDS_SIZE_STATIC * Float.BYTES;
 	private final int ENTITY_ID_OFFSET = TEX_ID_OFFSET + TEX_ID_SIZE * Float.BYTES;
+	private final static int ENTITY_ID_OFFSET_STATIC = TEX_ID_OFFSET_STATIC + TEX_ID_SIZE_STATIC * Float.BYTES;
 	private final int VERTEX_SIZE = 10;
+	private static final int VERTEX_SIZE_STATIC = 10;
 	private final int VERTEX_SIZE_BYTES = VERTEX_SIZE * Float.BYTES;
-	
+	private static final int VERTEX_SIZE_BYTES_STATIC = VERTEX_SIZE_STATIC * Float.BYTES;
+	private static Texture backDropScreen = AssetPool.getTexture("assets/images/backDrop.png");
 	private SpriteRenderer[] sprites;
 	private int numSprites;
 	private boolean hasRoom;
 	private float[] vertices;
 	private int[] texSlots = {0,1,2,3,4,5,6,7};
-	
+	private static int[] texSlotsStatic = {0,1,2,3,4,5,6,7};
 	private List<Texture> textures;
 	private int vaoID, vboID;
+	private static int backVAO, backVBO, backEBO;
+	private static float posx, posy;
 	private int maxBatchSize;
 	private int zIndex;
-	
 	private Renderer renderer;
+	private static float[] backVertices = {
+			//position		//color				//tex coords	//tex id and entity id
+			3, 1.5f,		1f, 1f, 1f, 1f, 	1, 1,			1,	1,	//up right
+			3, 1.25f,		1f, 1f, 1f,	1f,		1, 0,			1,	1,	//down right
+			2, 1.25f,		1f, 1f, 1f,	1f, 	0, 0,			1,	1,	//down left
+			2, 1.5f,		1f, 1f, 1f,	1f,		0, 1,			1,	1,	//up left
+	};
 	
 	public RenderBatch(int maxBatchSize, int zIndex, Renderer renderer) {
 		this.zIndex = zIndex;
@@ -101,41 +121,10 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		glEnableVertexAttribArray(4);
 	}
 	
-	public void addSprite(SpriteRenderer spr) {
-		//get index and add sprite object(sprite renderer)
-		int index = this.numSprites;
-		// [0,1,2,3,4,5]
-		this.sprites[index] = spr;
-		this.numSprites++;
-		
-		if(spr.getTexture() != null) {
-			if(!textures.contains(spr.getTexture())) {
-				textures.add(spr.getTexture());
-			}
-		}
-		
-		//add properties to local vertices array
-		loadVertexProperties(index);
-		
-		if(numSprites >= this.maxBatchSize) {
-			this.hasRoom = false;
-		}
-		
-	}
-	
 	public void render() {
 		boolean rebufferData = false;
 		for(int i = 0; i < numSprites; i++) {
 			SpriteRenderer spr = sprites[i];
-			boolean shouldRender;
-			try {
-				shouldRender = spr.gameObject.hasItemAssoc().inScene;
-			}catch(NullPointerException e){
-				continue;
-			}
-			if (shouldRender == false) {
-				continue;
-			}
 			if(spr.isDirty()) {
 				if(!hasTexture(spr.getTexture())) {
 					this.renderer.destroyGameObject(spr.gameObject);
@@ -172,18 +161,137 @@ public class RenderBatch implements Comparable<RenderBatch>{
 		glBindVertexArray(vaoID);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
-		
+
 		glDrawElements(GL_TRIANGLES, this.numSprites * 6, GL_UNSIGNED_INT, 0);
-		
+
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glBindVertexArray(0);
-		
+
 		for(int i = 0; i < textures.size(); i++) {
 			textures.get(i).unBind();
 		}
 		shader.detach();
 		
+	}
+
+	public static void backInit(){
+		//Generate and bind vertex array object
+		backVAO = glGenVertexArrays();
+		glBindVertexArray(backVAO);
+
+		//allocate necessary space for vertices
+		backVBO = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, backVBO);
+		glBufferData(GL_ARRAY_BUFFER, backVertices.length * Float.BYTES, GL_STATIC_DRAW);
+
+		//create and upload indices buffer
+		int backEBO = glGenBuffers();
+		int[] backIndices = {3, 2, 0, 0, 2, 1};
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, backEBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, backIndices, GL_DYNAMIC_DRAW);
+
+		//enable buffer attribute pointers
+		glVertexAttribPointer(0, POS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, POS_OFFSET_STATIC);
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, COLOR_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, COLOR_OFFSET_STATIC);
+		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(2, TEX_COORDS_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_COORDS_OFFSET_STATIC);
+		glEnableVertexAttribArray(2);
+
+		glVertexAttribPointer(3, TEX_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, TEX_ID_OFFSET_STATIC);
+		glEnableVertexAttribArray(3);
+
+		glVertexAttribPointer(4, ENTITY_ID_SIZE_STATIC, GL_FLOAT, false, VERTEX_SIZE_BYTES_STATIC, ENTITY_ID_OFFSET_STATIC);
+		glEnableVertexAttribArray(4);
+	}
+	public static void renderBackDrop(){
+		boolean init = false;
+
+		double offsetX = 0;
+		double offsetY = 0;
+
+		if(!init) {
+			backInit();
+			init = true;
+		}
+		try{
+			screen = GameCamera.getGameCameraPos();
+		}catch(Exception e){
+			//no game camera in use
+			screen = Window.getScene().camera().position;
+		}
+
+		try{
+			posx = screen.x;
+			posy = screen.y;
+		}catch(NullPointerException n){
+			assert false: "Error: player not found";
+			System.exit(0);
+		}
+		System.out.println(GameCamera.getGameCameraPos()+ "....");
+		//backdrop stitching onto world coords of camera
+		backVertices[0] = (float)(posx + offsetX + 5);
+		backVertices[1] = (float)(posy + offsetY + 3);
+
+		backVertices[10] = (float)(posx + offsetX + 5);
+		backVertices[11] = (float)(posy - offsetY + 0);
+
+		backVertices[20] = (float)(posx - offsetX + 0);
+		backVertices[21] = (float)(posy - offsetY + 0);
+
+		backVertices[30] = (float)(posx - offsetX + 0);
+		backVertices[31] = (float)(posy + offsetY + 3);
+
+		glBindBuffer(GL_ARRAY_BUFFER, backVBO);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, backVertices);
+
+		Shader shader = Renderer.getBoundShader();
+		shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
+		shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
+
+		glActiveTexture(GL_TEXTURE1);
+		backDropScreen.bind();
+
+		shader.uploadIntArray("uTextures", texSlotsStatic);
+
+		glBindVertexArray(backVAO);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glBindVertexArray(0);
+
+		backDropScreen.unBind();
+		shader.detach();
+
+	}
+
+	public void addSprite(SpriteRenderer spr) {
+		//get index and add sprite object(sprite renderer)
+		int index = this.numSprites;
+		// [0,1,2,3,4,5]
+		this.sprites[index] = spr;
+		this.numSprites++;
+
+		if(spr.getTexture() != null) {
+			if(!textures.contains(spr.getTexture())) {
+				textures.add(spr.getTexture());
+			}
+		}
+
+		//add properties to local vertices array
+		loadVertexProperties(index);
+
+		if(numSprites >= this.maxBatchSize) {
+			this.hasRoom = false;
+		}
+
 	}
 	
 	public boolean destroyIfExists(GameObject go) {

@@ -23,8 +23,4 @@ public class settings {
 	//camera settings
 	public static Vector4f cameraThreshold = new Vector4f(3.0f, 2.0f, 2.0f, 1.0f);
 
-
-
-
-
 }

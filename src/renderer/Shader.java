@@ -6,6 +6,10 @@ import java.nio.FloatBuffer;
 import org.joml.*;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
+
+import static org.lwjgl.opengl.GL11C.glGetError;
+import static org.lwjgl.opengl.GL20.glGetShaderInfoLog;
+
 public class Shader {
 
 		private int shaderProgramID;
@@ -56,10 +60,11 @@ public class Shader {
 		}
 		
 		public void compile() {
-			
+			//TODO:this is where an error originates - error 1282
 			int vertexID, fragmentID;
 			//compile and link shaders
 			//first thing: load and compile the vertex shader
+
 			vertexID = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
 			//pass shader source code to gpu
 			GL20.glShaderSource(vertexID,  vertexSource);
@@ -69,10 +74,10 @@ public class Shader {
 			if(success == GL20.GL_FALSE) {
 				int len = GL20.glGetShaderi(vertexID, GL20.GL_INFO_LOG_LENGTH);
 				System.err.println("ERROR: '"+filepath+"'\n\tVertex shader compilation failed.");
-				System.out.println(GL20.glGetShaderInfoLog(vertexID, len));
+				System.out.println(glGetShaderInfoLog(vertexID, len));
 				assert false : "";
 			}
-			
+
 			//compile and link shaders
 			//first thing: load and compile the fragment shader
 			fragmentID = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
@@ -83,26 +88,24 @@ public class Shader {
 			if(success == GL20.GL_FALSE) {
 				int len = GL20.glGetShaderi(fragmentID, GL20.GL_INFO_LOG_LENGTH);
 				System.err.println("ERROR: '"+filepath+"'\n\tFragment shader compilation failed.");
-				System.out.println(GL20.glGetShaderInfoLog(fragmentID, len));
+				System.out.println(glGetShaderInfoLog(fragmentID, len));
 				assert false : "";
 			}
-			
+
 			//link shaders and check for errors
 			shaderProgramID = GL20.glCreateProgram();
 			GL20.glAttachShader(shaderProgramID, vertexID);
 			GL20.glAttachShader(shaderProgramID, fragmentID);
 			GL20.glLinkProgram(shaderProgramID);
-		
+
 			//check for linking and attaching errors
 			success = GL20.glGetProgrami(shaderProgramID,  GL20.GL_LINK_STATUS);
-			GL20.glGetShaderInfoLog(shaderProgramID);
 			if(success == GL20.GL_FALSE) {
 				int len = GL20.glGetProgrami(shaderProgramID, GL20.GL_INFO_LOG_LENGTH);
 				System.err.println("ERROR: '"+filepath+"'\n\tLinking shaders failed");
 				//System.out.println(GL20.glGetProgramInfoLog(fragmentID, len));
-				assert false : "";
+				assert false : "ERROR: '"+filepath+"'\n\tLinking shaders failed";
 			}
-			
 		}
 		
 		public void use() {

@@ -1,6 +1,8 @@
 package main.engine;
 
 
+import main.components.GameCamera;
+import renderer.*;
 import scenes.LevelSceneInitializer;
 import scenes.Scene;
 import scenes.SceneInitializer;
@@ -31,11 +33,6 @@ import observers.EventSystem;
 import observers.Observer;
 import observers.events.Event;
 import physics2d.Physics2D;
-import renderer.DebugDraw;
-import renderer.Framebuffer;
-import renderer.PickingTexture;
-import renderer.Renderer;
-import renderer.Shader;
 
 
 public class Window implements Observer{
@@ -44,7 +41,7 @@ public class Window implements Observer{
 	private String title;
 	private long glfwWindow;
 	private static Window window = null;
-	
+	private int cycle = 0;
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public Vector2f screenSizePixels;
 	private long audioContext;
@@ -71,7 +68,7 @@ public class Window implements Observer{
 	}
 	
 	public static void changeScene(SceneInitializer sceneInitializer) {
-		
+
 		if(currentScene != null) {
 			currentScene.destroy();
 		}
@@ -81,6 +78,7 @@ public class Window implements Observer{
 		currentScene.load();
 		currentScene.init();
 		currentScene.start();
+
 	}
 	
 	public static Window get() {
@@ -181,8 +179,9 @@ public class Window implements Observer{
 		
 		this.imguiLayer = new ImGuiLayer(glfwWindow, pickingTexture);
 		this.imguiLayer.initImGui();
-		
+
 		Window.changeScene(new levelEditorSceneInitializer());
+
 	}
 
 	public void loop() {
@@ -192,11 +191,14 @@ public class Window implements Observer{
 		
 		Shader defaultShader = AssetPool.getShader("assets/shaders/default.glsl");
 		Shader pickingShader = AssetPool.getShader("assets/shaders/pickingShader.glsl");
-		
+		Shader backDropShader = AssetPool.getShader("assets/shaders/backDrop.glsl");
+
 		while(!glfwWindowShouldClose(glfwWindow)) {
 			//poll events(get keyboard inputs, mouse inputs, etc)
 			glfwPollEvents();
-			
+
+
+
 			//render to picking texture
 			
 			glDisable(GL_BLEND);
@@ -206,11 +208,22 @@ public class Window implements Observer{
 			Vector4f clearColor = currentScene.camera().clearColor;
 			glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			
+
+			//render to backdrop
+			/**
+			if(true){
+				Renderer.bindShader(backDropShader);
+				currentScene.renderBackDrop();
+			}
+			 **/
+
+
+
+			//render main
 			Renderer.bindShader(pickingShader);
 			currentScene.render();
 			
-			
+
 			
 			pickingTexture.disableWriting();
 			glEnable(GL_BLEND);
@@ -219,12 +232,12 @@ public class Window implements Observer{
 			DebugDraw.beginFrame();
 			
 			this.framebuffer.bind();
-			glClearColor(1, 1, 1, 1);
+			//glClearColor(1, 1, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			if(dt >= 0) {
-				
-				
+				Renderer.bindShader(defaultShader);
+				RenderBatch.renderBackDrop();
 				Renderer.bindShader(defaultShader);
 				if(runtimeActive) {
 					currentScene.update(dt);
@@ -244,6 +257,11 @@ public class Window implements Observer{
 			endTime = (float)glfwGetTime();
 			dt = endTime - beginTime;
 			beginTime = endTime;
+
+			//error handling
+			cycle++;
+			int err = glGetError();
+			System.out.println(err + "," + cycle);
 		}
 		
 	}
@@ -300,6 +318,9 @@ public class Window implements Observer{
 	
 	public static Physics2D getPhysics() {
 		return currentScene.getPhysics();
+	}
+	public static GameObject getGameCamera(){
+		return getScene().getGameObjectWith(GameCamera.class);
 	}
 	
 }

@@ -15,8 +15,10 @@ import org.joml.Vector3f;
 import physics2d.components.Box2DCollider;
 import physics2d.components.RigidBody2D;
 import physics2d.enums.BodyType;
-import static org.lwjgl.glfw.GLFW.*;
+import renderer.Texture;
 
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.glGetError;
 
 
 public class levelEditorSceneInitializer extends SceneInitializer{
@@ -50,7 +52,6 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 	@Override
 	public void loadResources(Scene scene) {
 		AssetPool.getShader("assets/shaders/default.glsl");
-
 		AssetPool.addSpriteSheet("assets/images/playerSprites.png",
 				new Spritesheet(AssetPool.getTexture("assets/images/playerSprites.png"), 16, 16, 81, 0));//change 16,16,81 to respective size and num of sprites
 
@@ -59,13 +60,12 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		AssetPool.addSpriteSheet("assets/images/decorationsAndBlocks.png",
 				new Spritesheet(AssetPool.getTexture("assets/images/decorationsAndBlocks.png"), 16, 16, 81, 0));
 		//TODO: TIMESTAMP: 8:57:01, substitute "16" for sprite size
+
 		AssetPool.addSpriteSheet("assets/images/gizmos.png", new Spritesheet(AssetPool.getTexture("assets/images/gizmos.png"), 24, 48, 3, 0));
-
 		AssetPool.getTexture("assets/images/blendImage2.png");
-
+		AssetPool.getTexture("assets/images/backDrop.png");
 		//TODO:add all sounds, this one doesn't work yet
 		//AssetPool.addSound("assets/sounds/test.ogg", false);
-
 		for(GameObject g : scene.getGameObjects()) {
 			if(g.getComponent(SpriteRenderer.class) != null) {
 				SpriteRenderer spr = g.getComponent(SpriteRenderer.class);
