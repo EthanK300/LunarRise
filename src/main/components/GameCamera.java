@@ -18,7 +18,7 @@ public class GameCamera extends Component{
 	private transient float highestY = Float.MIN_VALUE;
 	private transient float undergroundYLevel = 0.0f;
 	private transient float cameraBuffer = 1.5f;
-	
+	public static Vector2f gameCameraPos = new Vector2f();
 	private transient Vector4f cameraThreshold = settings.cameraThreshold;
 	//private transient float playerBuffer = 0.25f;
 	//private static Vector2f terminalVelocity = settings.terminalVelocitry;
@@ -72,6 +72,10 @@ public class GameCamera extends Component{
 				gameCamera.position.y = gameCamera.position.y + diffY2;
 				diffY2 = 0f;
 			}
+			gameCameraPos = gameCamera.position;
 		}
+	}
+	public static Vector2f getGameCameraPos(){
+		return gameCameraPos;
 	}
 }

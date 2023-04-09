@@ -215,6 +215,13 @@ public class RenderBatch implements Comparable<RenderBatch>{
 
 		if(!init) {
 			backInit();
+			init = true;
+		}
+		try{
+			screen = GameCamera.getGameCameraPos();
+		}catch(Exception e){
+			//no game camera in use
+			screen = Window.getScene().camera().position;
 		}
 
 		try{
@@ -224,7 +231,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
 			assert false: "Error: player not found";
 			System.exit(0);
 		}
-		System.out.println(posx + "," + posy + "....");
+		System.out.println(GameCamera.getGameCameraPos()+ "....");
 		//backdrop stitching onto world coords of camera
 		backVertices[0] = (float)(posx + offsetX + 5);
 		backVertices[1] = (float)(posy + offsetY + 3);
