@@ -5,7 +5,7 @@ import org.joml.Vector4f;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_F;
 
 public class settings {
-	//editor settings
+	//editor/debug settings
 	public static float GRID_WIDTH = 0.25f;
 	public static float GRID_HEIGHT = 0.25f;
 	public static boolean showTelemetry = true;

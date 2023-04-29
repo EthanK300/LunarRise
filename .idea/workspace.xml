@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="added telemetry capability">
-      <change afterPath="$PROJECT_DIR$/src/main/util/telemetry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/player/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/PlayerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/util/settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/util/settings.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +144,7 @@
       <workItem from="1681264794851" duration="594000" />
       <workItem from="1681460848598" duration="77000" />
       <workItem from="1681531226580" duration="603000" />
-      <workItem from="1682784255311" duration="903000" />
+      <workItem from="1682784255311" duration="1454000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>
@@ -256,7 +251,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681264824985</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="added telemetry capability">
+      <created>1682785171603</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1682785171603</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added telemetry capability">
+      <created>1682785343843</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1682785343843</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
