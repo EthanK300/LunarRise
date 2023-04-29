@@ -57,6 +57,7 @@ public class PlayerController extends Component {
 	private Vector2f pos;
 	private GameObject player;
 	private Vector2f acquireItemRange = settings.acquireItemRange;
+	private static Vector2f position, accelerationStatic, velocityStatic = new Vector2f();
 
 	@Override
 	public void start() {
@@ -165,6 +166,9 @@ public class PlayerController extends Component {
 		this.velocity.y = Math.max(Math.min(this.velocity.y,  this.terminalVelocity.y), -this.terminalVelocity.y);
 		//System.out.println(this.velocity);
 		//update box2d physics about new movement
+		velocityStatic = this.velocity;
+		accelerationStatic = this.acceleration;
+		position = this.gameObject.transform.position;
 		this.rb.setVelocity(this.velocity);
 		this.rb.setAngularVelocity(0);
 
@@ -256,6 +260,15 @@ public class PlayerController extends Component {
 	}
 	public boolean itemInInv(Item item){
 		return inventory.contains(item);
+	}
+	public static Vector2f getPosition(){
+		return position;
+	}
+	public static Vector2f getAccelerationStatic(){
+		return accelerationStatic;
+	}
+	public static Vector2f getVelocityStatic(){
+		return velocityStatic;
 	}
 
 }

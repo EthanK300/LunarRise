@@ -2,6 +2,8 @@ package main.engine;
 
 
 import main.components.GameCamera;
+import main.util.settings;
+import main.util.telemetry;
 import renderer.*;
 import scenes.LevelSceneInitializer;
 import scenes.Scene;
@@ -108,6 +110,7 @@ public class Window implements Observer{
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();
 		System.err.println("Closed.");
+		System.exit(0);
 	}
 	public void init() {
 		//setup error sequence
@@ -193,7 +196,14 @@ public class Window implements Observer{
 		Shader pickingShader = AssetPool.getShader("assets/shaders/pickingShader.glsl");
 		Shader backDropShader = AssetPool.getShader("assets/shaders/backDrop.glsl");
 
+		telemetry TELE = new telemetry();
+
 		while(!glfwWindowShouldClose(glfwWindow)) {
+			if(settings.showTelemetry){
+				TELE.update();
+			}else{
+				TELE.hideTele();
+			}
 			//poll events(get keyboard inputs, mouse inputs, etc)
 			glfwPollEvents();
 

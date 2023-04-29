@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="fixed camera rendering position">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/LIBS.xml" afterDir="false" />
+    <list default="true" id="be4dc13a-c3c7-44a4-96e3-e0ad8b68a911" name="Changes" comment="added telemetry capability">
+      <change afterPath="$PROJECT_DIR$/src/main/util/telemetry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LunarRise.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LunarRise.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/engine/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/player/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/player/PlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/util/settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/util/settings.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +69,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/awalk_/IntelliJ/LunarRise",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/awalk_ve0j31k/IdeaProjects/LunarRise",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -143,6 +146,10 @@
       <workItem from="1675897844721" duration="1628000" />
       <workItem from="1675904124126" duration="29000" />
       <workItem from="1675904419944" duration="2560000" />
+      <workItem from="1681264794851" duration="594000" />
+      <workItem from="1681460848598" duration="77000" />
+      <workItem from="1681531226580" duration="603000" />
+      <workItem from="1682784255311" duration="903000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit, migrated over from Eclipse">
       <created>1674022057891</created>
@@ -242,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675835535246</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add libs">
+      <created>1681264824985</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1681264824985</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,6 +274,21 @@
     </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -281,21 +310,6 @@
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="master" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit, migrated over from Eclipse" />
@@ -309,6 +323,8 @@
     <MESSAGE value="refined" />
     <MESSAGE value="fix commit structure 1" />
     <MESSAGE value="refactor item system into abstract" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor item system into abstract" />
+    <MESSAGE value="add libs" />
+    <MESSAGE value="added telemetry capability" />
+    <option name="LAST_COMMIT_MESSAGE" value="added telemetry capability" />
   </component>
 </project>
