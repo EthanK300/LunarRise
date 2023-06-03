@@ -196,6 +196,7 @@ public class Window implements Observer{
 		Shader pickingShader = AssetPool.getShader("assets/shaders/pickingShader.glsl");
 		Shader backDropShader = AssetPool.getShader("assets/shaders/backDrop.glsl");
 
+
 		telemetry TELE = new telemetry();
 
 		while(!glfwWindowShouldClose(glfwWindow)) {

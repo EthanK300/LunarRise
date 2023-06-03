@@ -4,6 +4,7 @@ import main.components.Component;
 import main.components.StateMachine;
 import main.components.Terrain;
 import main.items.Item;
+import main.util.AssetPool;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -33,9 +34,9 @@ public class PlayerController extends Component {
 
 	public float walkSpeed = settings.walkSpeed;
 	public float jumpForce = settings.jumpForce;
-	public float jumpImpulse = settings.jumpForce;
+	public float jumpImpulse = settings.jumpImpulse;
 	public float slowDownForce = settings.slowDownForce;
-	public Vector2f terminalVelocity = settings.terminalVelocitry;
+	public Vector2f terminalVelocity = settings.terminalVelocity;
 
 	private PlayerState playerState = PlayerState.Small;
 	public transient boolean onGround = false;
@@ -47,6 +48,7 @@ public class PlayerController extends Component {
 	private transient float playerWidth = 0.25f;
 	private transient float playerHeight = 0.25f;
 	private transient int jumpTime = 0;
+	private static transient float highestYPos = 0;
 	private transient Vector2f acceleration = new Vector2f();
 	private transient Vector2f velocity = new Vector2f();
 	private transient boolean isDead = false;
@@ -58,6 +60,7 @@ public class PlayerController extends Component {
 	private GameObject player;
 	private Vector2f acquireItemRange = settings.acquireItemRange;
 	private static Vector2f position, accelerationStatic, velocityStatic = new Vector2f();
+	public static int jumpTime1;
 
 	@Override
 	public void start() {
@@ -81,9 +84,13 @@ public class PlayerController extends Component {
 	public Vector2f getVelocity() {
 		return this.velocity;
 	}
+	public static int getJumpTime(){
+		return jumpTime1;
+	}
 
 	@Override
 	public void update(float dt) {
+		AssetPool.getSound("assets/sounds/crabrave.ogg").play();
 		//code player control bindings
 		/**
 		 * format:
@@ -129,8 +136,9 @@ public class PlayerController extends Component {
 		}
 		//check if on ground
 		checkOnGround();
+		jumpTime1 = jumpTime;
 		//checkOnLeft();
-		if((keyListener.isKeyPressed(GLFW_KEY_SPACE) || keyListener.isKeyPressed(GLFW_KEY_UP)) && (jumpTime > 0 || onGround || groundDebounce > 0)){
+		if((keyListener.isKeyPressed(GLFW_KEY_SPACE) || keyListener.isKeyPressed(GLFW_KEY_UP) || keyListener.isKeyPressed(GLFW_KEY_W)) && (jumpTime > 0 || onGround || groundDebounce > 0)){
 			//jumped
 			//System.out.println(System.currentTimeMillis() + "," + jumpTime);
 			if((onGround || groundDebounce > 0) && jumpTime == 0){
@@ -164,6 +172,11 @@ public class PlayerController extends Component {
 		this.velocity.y += this.acceleration.y * dt;
 		this.velocity.x = Math.max(Math.min(this.velocity.x,  this.terminalVelocity.x), -this.terminalVelocity.x);
 		this.velocity.y = Math.max(Math.min(this.velocity.y,  this.terminalVelocity.y), -this.terminalVelocity.y);
+
+		if(this.gameObject.transform.position.y > highestYPos){
+			highestYPos = this.gameObject.transform.position.y;
+		}
+
 		//System.out.println(this.velocity);
 		//update box2d physics about new movement
 		velocityStatic = this.velocity;
@@ -257,6 +270,9 @@ public class PlayerController extends Component {
 			//inventory does not contain item
 			return false;
 		}
+	}
+	public static float getHighestYPos() {
+		return highestYPos;
 	}
 	public boolean itemInInv(Item item){
 		return inventory.contains(item);
