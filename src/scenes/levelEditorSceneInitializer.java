@@ -65,7 +65,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		AssetPool.getTexture("assets/images/blendImage2.png");
 		AssetPool.getTexture("assets/images/backDrop.png");
 		//TODO:add all sounds
-		AssetPool.addSound("assets/sounds/crabrave.ogg", true);
+		AssetPool.addSound("assets/sounds/bikerides.ogg", true);
 		for(GameObject g : scene.getGameObjects()) {
 			if(g.getComponent(SpriteRenderer.class) != null) {
 				SpriteRenderer spr = g.getComponent(SpriteRenderer.class);
