@@ -65,7 +65,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		AssetPool.getTexture("assets/images/blendImage2.png");
 		AssetPool.getTexture("assets/images/backDrop.png");
 		//TODO:add all sounds
-		AssetPool.addSound("assets/sounds/crabrave.ogg", true);
+		AssetPool.addSound("assets/sounds/bikerides.ogg", true);
 		for(GameObject g : scene.getGameObjects()) {
 			if(g.getComponent(SpriteRenderer.class) != null) {
 				SpriteRenderer spr = g.getComponent(SpriteRenderer.class);
@@ -187,7 +187,7 @@ public class levelEditorSceneInitializer extends SceneInitializer{
 		GameObject object = PreFabs.generateSpriteObject(sprite, 0.25f, 0.25f);//generated sprite size
 		RigidBody2D rb = new RigidBody2D();
 		//if the shift key is pressed it changes to a non-static object
-		if(keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) || mouseListener.mouseButtonDown(GLFW_KEY_RIGHT_SHIFT)) {
+		if(keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) || keyListener.isKeyPressed(GLFW_KEY_RIGHT_SHIFT)) {
 			rb.setBodyType(BodyType.Dynamic);
 			//System.out.println("pressed");
 		}else{

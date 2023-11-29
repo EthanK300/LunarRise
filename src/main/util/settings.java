@@ -9,6 +9,7 @@ public class settings {
 	public static float GRID_WIDTH = 0.25f;
 	public static float GRID_HEIGHT = 0.25f;
 	public static boolean showTelemetry = true;
+	public static boolean playMusic = true;
 
 	//player settings
 	public static float walkSpeed = 1.0f;

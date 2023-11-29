@@ -36,6 +36,9 @@ public class PlayerController extends Component {
 	public float jumpForce = settings.jumpForce;
 	public float jumpImpulse = settings.jumpImpulse;
 	public float slowDownForce = settings.slowDownForce;
+	private static float maxVelocityTime = 0;
+	private static float maxVelocityStart = 0;
+	private boolean velTestJump = false;
 	public Vector2f terminalVelocity = settings.terminalVelocity;
 
 	private PlayerState playerState = PlayerState.Small;
@@ -54,10 +57,10 @@ public class PlayerController extends Component {
 	private transient boolean isDead = false;
 	private transient int enemyBounce = 0;
 	private boolean controlsActive;
+	private double zero;
 	private int MAX_SIZE = settings.inventorySize;
 	private List<Item> inventory;
 	private Vector2f pos;
-	private GameObject player;
 	private Vector2f acquireItemRange = settings.acquireItemRange;
 	private static Vector2f position, accelerationStatic, velocityStatic = new Vector2f();
 	public static int jumpTime1;
@@ -90,7 +93,9 @@ public class PlayerController extends Component {
 
 	@Override
 	public void update(float dt) {
-		AssetPool.getSound("assets/sounds/crabrave.ogg").play();
+		if(settings.playMusic) {
+			AssetPool.getSound("assets/sounds/bikerides.ogg").play();
+		}
 		//code player control bindings
 		/**
 		 * format:
@@ -134,13 +139,30 @@ public class PlayerController extends Component {
 		if(this.velocity.x == 0) {
 			//this.stateMachine.trigger("stopRunning");//TODO: create this animation state
 		}
+
+
 		//check if on ground
 		checkOnGround();
 		jumpTime1 = jumpTime;
+		if((onGround || this.velocity.y == 0)&& jumpTime == 0){
+			zero = this.gameObject.transform.position.y;
+			zero = (zero - (zero%0.25f) + (0.25/2));
+			this.gameObject.transform.position.y = (float)zero;
+		}
 		//checkOnLeft();
 		if((keyListener.isKeyPressed(GLFW_KEY_SPACE) || keyListener.isKeyPressed(GLFW_KEY_UP) || keyListener.isKeyPressed(GLFW_KEY_W)) && (jumpTime > 0 || onGround || groundDebounce > 0)){
 			//jumped
 			//System.out.println(System.currentTimeMillis() + "," + jumpTime);
+			if(this.velocity.y == 3.1 && !velTestJump) {
+				maxVelocityStart = System.currentTimeMillis();
+				velTestJump = true;
+			}
+			if(this.velocity.y != 3.1 && this.velocity.y != 0 && velTestJump){
+				maxVelocityTime = maxVelocityStart - System.currentTimeMillis();
+				velTestJump = false;
+			}
+			System.out.println(maxVelocityTime);
+
 			if((onGround || groundDebounce > 0) && jumpTime == 0){
 				//AssetPool.getSound("assets/sounds/jump-small.ogg").play();//TODO: add asset to game
 				jumpTime = 28;//max variable length jump
@@ -273,6 +295,9 @@ public class PlayerController extends Component {
 	}
 	public static float getHighestYPos() {
 		return highestYPos;
+	}
+	public static float getMaxVelocityTime(){
+		return maxVelocityTime;
 	}
 	public boolean itemInInv(Item item){
 		return inventory.contains(item);

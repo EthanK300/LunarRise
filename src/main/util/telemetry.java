@@ -13,6 +13,7 @@ public class telemetry{
     String cameraPosition1 = "cameraPosition: ";
     String jumpTime1 = "Jump Time: ";
     String highestYPos1 = "Highest Y Pos: ";
+    String v31Time = "Duration of max V:  ";
     JFrame tele = new JFrame("Telemetry Data");
     JLabel playerVelocity = new JLabel(playerVelocity1);
     JLabel playerPosition = new JLabel(playerPosition1);
@@ -21,6 +22,7 @@ public class telemetry{
     JLabel cameraPosition = new JLabel(cameraPosition1);
     JLabel jumpTime = new JLabel(jumpTime1);
     JLabel highestYPos = new JLabel(highestYPos1);
+    JLabel maxVelocityTime = new JLabel(v31Time);
 
     public telemetry(){
         tele.setSize(400,400);
@@ -34,6 +36,7 @@ public class telemetry{
         tele.add(cameraPosition);
         tele.add(jumpTime);
         tele.add(highestYPos);
+        tele.add(maxVelocityTime);
         tele.setVisible(true);
     }
     public void update(){
@@ -43,6 +46,7 @@ public class telemetry{
             playerPosition1 = "Position" + PlayerController.getPosition().x + ", " + PlayerController.getPosition().y;
             jumpTime1 = "Jump Time: " + PlayerController.getJumpTime();
             highestYPos1 = "Highest Y Pos: " + PlayerController.getHighestYPos();
+            v31Time = "Max V time: " + PlayerController.getMaxVelocityTime();
 
             playerVelocity.setText(playerVelocity1);
             playerPosition.setText(playerPosition1);
@@ -51,6 +55,7 @@ public class telemetry{
             cameraPosition.setText(cameraPosition1);
             jumpTime.setText(jumpTime1);
             highestYPos.setText(highestYPos1);
+            maxVelocityTime.setText(v31Time);
 
             tele.repaint();
         }catch(NullPointerException e){

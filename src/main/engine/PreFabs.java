@@ -7,6 +7,8 @@ import main.components.SpriteRenderer;
 import main.components.Spritesheet;
 import main.components.StateMachine;
 import main.util.AssetPool;
+import org.joml.Vector2f;
+import physics2d.components.Box2DCollider;
 import physics2d.components.PillboxCollider;
 import physics2d.components.RigidBody2D;
 import physics2d.enums.BodyType;
@@ -73,6 +75,9 @@ public class PreFabs {
 		character.addComponent(stateMachine);
 		//add player collider
 		PillboxCollider pb = new PillboxCollider();
+		//Box2DCollider bc = new Box2DCollider();
+		//bc.setHalfSize(new Vector2f(0.24f,0.24f));
+		//bc.setOffset(new Vector2f(0,0));
 		//creating the pb collider
         pb.width = 0.39f;
         pb.height = 0.31f;
@@ -83,6 +88,7 @@ public class PreFabs {
         rb.setMass(25.0f);
 		
         character.addComponent(rb);
+		//character.addComponent(bc);
         character.addComponent(pb);
         character.addComponent(new PlayerController());
 

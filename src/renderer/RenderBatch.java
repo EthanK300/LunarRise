@@ -66,10 +66,10 @@ public class RenderBatch implements Comparable<RenderBatch>{
 	private Renderer renderer;
 	private static float[] backVertices = {
 			//position		//color				//tex coords	//tex id and entity id
-			3, 1.5f,		1f, 1f, 1f, 1f, 	1, 1,			1,	1,	//up right
-			3, 1.25f,		1f, 1f, 1f,	1f,		1, 0,			1,	1,	//down right
-			2, 1.25f,		1f, 1f, 1f,	1f, 	0, 0,			1,	1,	//down left
-			2, 1.5f,		1f, 1f, 1f,	1f,		0, 1,			1,	1,	//up left
+			1.0f, 1.0f,			1f, 1f, 1f, 1f, 	1, 1,			1,	1,	//up right
+			1.0f, -1.0f,		1f, 1f, 1f,	1f,		1, 0,			1,	1,	//down right
+			-1.0f, -1.0f,		1f, 1f, 1f,	1f, 	0, 0,			1,	1,	//down left
+			-1.0f, 1.0f,		1f, 1f, 1f,	1f,		0, 1,			1,	1,	//up left
 	};
 	
 	public RenderBatch(int maxBatchSize, int zIndex, Renderer renderer) {
@@ -217,34 +217,6 @@ public class RenderBatch implements Comparable<RenderBatch>{
 			backInit();
 			init = true;
 		}
-		try{
-			screen = GameCamera.getGameCameraPos();
-		}catch(Exception e){
-			//no game camera in use
-			screen = Window.getScene().camera().position;
-		}
-
-		try{
-			posx = screen.x;
-			posy = screen.y;
-		}catch(NullPointerException n){
-			assert false: "Error: player not found";
-			System.exit(0);
-		}
-		System.out.println(GameCamera.getGameCameraPos()+ "....");
-		//backdrop stitching onto world coords of camera
-		backVertices[0] = (float)(posx + offsetX + 5);
-		backVertices[1] = (float)(posy + offsetY + 3);
-
-		backVertices[10] = (float)(posx + offsetX + 5);
-		backVertices[11] = (float)(posy - offsetY + 0);
-
-		backVertices[20] = (float)(posx - offsetX + 0);
-		backVertices[21] = (float)(posy - offsetY + 0);
-
-		backVertices[30] = (float)(posx - offsetX + 0);
-		backVertices[31] = (float)(posy + offsetY + 3);
-
 		glBindBuffer(GL_ARRAY_BUFFER, backVBO);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, backVertices);
 

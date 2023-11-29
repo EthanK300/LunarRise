@@ -224,9 +224,9 @@ public class Window implements Observer{
 			/**
 			if(true){
 				Renderer.bindShader(backDropShader);
-				currentScene.renderBackDrop();
+				RenderBatch.renderBackDrop();
 			}
-			 **/
+			**/
 
 
 
@@ -247,7 +247,7 @@ public class Window implements Observer{
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			if(dt >= 0) {
-				Renderer.bindShader(defaultShader);
+				Renderer.bindShader(backDropShader);
 				RenderBatch.renderBackDrop();
 				Renderer.bindShader(defaultShader);
 				if(runtimeActive) {
