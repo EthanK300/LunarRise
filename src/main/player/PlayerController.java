@@ -40,7 +40,7 @@ public class PlayerController extends Component {
 	private static float maxVelocityStart = 0;
 	private boolean velTestJump = false;
 	public Vector2f terminalVelocity = settings.terminalVelocity;
-
+	public static float DT;
 	private PlayerState playerState = PlayerState.Small;
 	public transient boolean onGround = false;
 	private transient float groundDebounce = 0.0f;
@@ -93,7 +93,7 @@ public class PlayerController extends Component {
 
 	@Override
 	public void update(float dt) {
-		if(settings.playMusic) {
+		if (settings.playMusic) {
 			AssetPool.getSound("assets/sounds/bikerides.ogg").play();
 		}
 		//code player control bindings
@@ -106,96 +106,109 @@ public class PlayerController extends Component {
 		 *
 		 */
 
-		if(!controlsActive) {
+		if (!controlsActive) {
 			return;
 		}
 
-		if(keyListener.isKeyPressed(GLFW_KEY_RIGHT) || keyListener.isKeyPressed(GLFW_KEY_D)) {
+		if (keyListener.isKeyPressed(GLFW_KEY_RIGHT) || keyListener.isKeyPressed(GLFW_KEY_D)) {
 			this.gameObject.transform.scale.x = playerWidth;
 			this.acceleration.x = walkSpeed;
-			if(this.velocity.x < 0) {
+			if (this.velocity.x < 0) {
 				//this.stateMachine.trigger("switchDirection");//TODO: create this animation state
 				this.velocity.x += slowDownForce;
-			}else {
+			} else {
 				this.stateMachine.trigger("startRunning");
 			}
-		}else if(keyListener.isKeyPressed(GLFW_KEY_LEFT) || keyListener.isKeyPressed(GLFW_KEY_A)) {
+		} else if (keyListener.isKeyPressed(GLFW_KEY_LEFT) || keyListener.isKeyPressed(GLFW_KEY_A)) {
 			this.gameObject.transform.scale.x = -playerWidth;
 			this.acceleration.x = -walkSpeed;
-			if(this.velocity.x > 0) {
+			if (this.velocity.x > 0) {
 				//this.stateMachine.trigger("switchDirection");//TODO: create this animation state
 				this.velocity.x -= slowDownForce;
-			}else {
+			} else {
 				//this.stateMachine.trigger("startRunning");//TODO: create this animation state
 			}
-		}else {
+		} else {
 			this.acceleration.x = 0;
-			if(this.velocity.x > 0) {
-				this.velocity.x = Math.max(0,  this.velocity.x - slowDownForce);
-			}else if(this.velocity.x < 0) {
-				this.velocity.x = Math.min(0,  this.velocity.x + slowDownForce);
+			if (this.velocity.x > 0) {
+				this.velocity.x = Math.max(0, this.velocity.x - slowDownForce);
+			} else if (this.velocity.x < 0) {
+				this.velocity.x = Math.min(0, this.velocity.x + slowDownForce);
 			}
 		}
-		if(this.velocity.x == 0) {
+		if (this.velocity.x == 0) {
 			//this.stateMachine.trigger("stopRunning");//TODO: create this animation state
 		}
 
 
 		//check if on ground
 		checkOnGround();
-		jumpTime1 = jumpTime;
-		if((onGround || this.velocity.y == 0)&& jumpTime == 0){
-			zero = this.gameObject.transform.position.y;
-			zero = (zero - (zero%0.25f) + (0.25/2));
-			this.gameObject.transform.position.y = (float)zero;
-		}
+
+		 jumpTime1 = jumpTime;
+		 if ((onGround || this.velocity.y == 0) && jumpTime == 0) {
+		 	zero = this.gameObject.transform.position.y;
+		 	zero = (zero - (zero % 0.25f) + (0.25 / 2));
+		 	this.gameObject.transform.position.y = (float) zero;
+		 }
+
 		//checkOnLeft();
-		if((keyListener.isKeyPressed(GLFW_KEY_SPACE) || keyListener.isKeyPressed(GLFW_KEY_UP) || keyListener.isKeyPressed(GLFW_KEY_W)) && (jumpTime > 0 || onGround || groundDebounce > 0)){
-			//jumped
-			//System.out.println(System.currentTimeMillis() + "," + jumpTime);
-			if(this.velocity.y == 3.1 && !velTestJump) {
-				maxVelocityStart = System.currentTimeMillis();
-				velTestJump = true;
-			}
-			if(this.velocity.y != 3.1 && this.velocity.y != 0 && velTestJump){
-				maxVelocityTime = maxVelocityStart - System.currentTimeMillis();
-				velTestJump = false;
-			}
-			System.out.println(maxVelocityTime);
-
-			if((onGround || groundDebounce > 0) && jumpTime == 0){
-				//AssetPool.getSound("assets/sounds/jump-small.ogg").play();//TODO: add asset to game
-				jumpTime = 28;//max variable length jump
-				this.velocity.y = jumpImpulse;
-
-			}else if(jumpTime > 0) {
-				jumpTime--;
-				this.velocity.y = ((jumpTime / 2.2f) * jumpForce);
-			}else {
-				this.velocity.y = 0;
-			}
-			groundDebounce = 0;
-		}else if(!onGround) {
-			if(this.jumpTime > 0) {
-				this.velocity.y *= 0.35f;//TODO:tune this for if you release space key early, how fast do you fall?
-				this.jumpTime = 0;
-			}
-			groundDebounce -= dt;
-			this.acceleration.y = Window.getPhysics().getGravity().y * 0.7f;//TODO: tune gravity
-		}else {
+		this.acceleration.y = -3;
+		DT = dt;
+		if ((keyListener.isKeyPressed(GLFW_KEY_SPACE) || keyListener.isKeyPressed(GLFW_KEY_UP) || keyListener.isKeyPressed(GLFW_KEY_W)) && onGround) {
+			this.velocity.y = 3;
+		} else if (onGround) {
 			this.velocity.y = 0;
-			this.acceleration.y = 0;
-			groundDebounce = groundDebounceTime;
+		} else {
 		}
+
+		/**
+		 if((keyListener.isKeyPressed(GLFW_KEY_SPACE) || keyListener.isKeyPressed(GLFW_KEY_UP) || keyListener.isKeyPressed(GLFW_KEY_W)) && (jumpTime > 0 || onGround || groundDebounce > 0)){
+		 //jumped
+		 //System.out.println(System.currentTimeMillis() + "," + jumpTime);
+		 if(this.velocity.y == 3.1 && !velTestJump) {
+		 maxVelocityStart = System.currentTimeMillis();
+		 velTestJump = true;
+		 }
+		 if(this.velocity.y != 3.1 && this.velocity.y != 0 && velTestJump){
+		 maxVelocityTime = maxVelocityStart - System.currentTimeMillis();
+		 velTestJump = false;
+		 }
+		 //System.out.println(maxVelocityTime);
+
+		 if((onGround || groundDebounce > 0) && jumpTime == 0){
+		 //AssetPool.getSound("assets/sounds/jump-small.ogg").play();//TODO: add asset to game
+		 jumpTime = 28;//max variable length jump
+		 this.velocity.y = jumpImpulse;
+
+		 }else if(jumpTime > 0) {
+		 jumpTime--;
+		 this.velocity.y = ((jumpTime / 2.2f) * jumpForce);
+		 }else {
+		 this.velocity.y = 0;
+		 }
+		 groundDebounce = 0;
+		 }else if(!onGround) {
+		 if(this.jumpTime > 0) {
+		 this.velocity.y *= 0.35f;//TODO:tune this for if you release space key early, how fast do you fall?
+		 this.jumpTime = 0;
+		 }
+		 groundDebounce -= dt;
+		 this.acceleration.y = Window.getPhysics().getGravity().y * 0.7f;//TODO: tune gravity
+		 }else {
+		 this.velocity.y = 0;
+		 this.acceleration.y = 0;
+		 groundDebounce = groundDebounceTime;
+		 }
+		 **/
 
 		//System.out.println(System.currentTimeMillis() + "," + jumpTime);
 		//update movement
 		this.velocity.x += this.acceleration.x * dt;
 		this.velocity.y += this.acceleration.y * dt;
-		this.velocity.x = Math.max(Math.min(this.velocity.x,  this.terminalVelocity.x), -this.terminalVelocity.x);
-		this.velocity.y = Math.max(Math.min(this.velocity.y,  this.terminalVelocity.y), -this.terminalVelocity.y);
+		this.velocity.x = Math.max(Math.min(this.velocity.x, this.terminalVelocity.x), -this.terminalVelocity.x);
+		this.velocity.y = Math.max(Math.min(this.velocity.y, this.terminalVelocity.y), -this.terminalVelocity.y);
 
-		if(this.gameObject.transform.position.y > highestYPos){
+		if (this.gameObject.transform.position.y > highestYPos) {
 			highestYPos = this.gameObject.transform.position.y;
 		}
 
@@ -295,9 +308,6 @@ public class PlayerController extends Component {
 	}
 	public static float getHighestYPos() {
 		return highestYPos;
-	}
-	public static float getMaxVelocityTime(){
-		return maxVelocityTime;
 	}
 	public boolean itemInInv(Item item){
 		return inventory.contains(item);

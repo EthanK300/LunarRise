@@ -272,7 +272,7 @@ public class Window implements Observer{
 			//error handling
 			cycle++;
 			int err = glGetError();
-			System.out.println(err + "," + cycle);
+			//System.out.println(err + "," + cycle);
 		}
 		
 	}
